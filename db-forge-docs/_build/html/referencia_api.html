@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Referencia de API del Núcleo &mdash; BD Forge (Data Hopper) vE 2.0.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e51e059b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Sistema de Logs Forense y Auditoría" href="sistema_logs_forense.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BD Forge (Data Hopper)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">📘 Manual del Operador</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_usuario.html">Manual del Operador</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolucion_problemas.html">Guía de Resolución de Problemas (Troubleshooting)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">⚙️ Arquitectura e Ingeniería</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arquitectura_tecnica.html">Arquitectura del Sistema y Núcleo de Procesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motor_inferencia.html">Motor de Inferencia Estadística (Stride Sampling)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sistema_logs_forense.html">Sistema de Logs Forense y Auditoría</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">💻 Desarrollo (DevOps)</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Referencia de API del Núcleo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#readers-namespace">Readers Namespace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clase-excelreadernpoi">Clase <code class="docutils literal notranslate"><span class="pre">ExcelReaderNPOI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clase-odsreader">Clase <code class="docutils literal notranslate"><span class="pre">OdsReader</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ui-namespace">UI Namespace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clase-mainmenu-controlador">Clase <code class="docutils literal notranslate"><span class="pre">MainMenu</span></code> (Controlador)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clase-sheetcard-componente">Clase <code class="docutils literal notranslate"><span class="pre">SheetCard</span></code> (Componente)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BD Forge (Data Hopper)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Referencia de API del Núcleo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/referencia_api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="referencia-de-api-del-nucleo">
+<h1>Referencia de API del Núcleo<a class="headerlink" href="#referencia-de-api-del-nucleo" title="Link to this heading"></a></h1>
+<p>Documentación técnica de las clases críticas del espacio de nombres <code class="docutils literal notranslate"><span class="pre">DbfForge.Core</span></code>.</p>
+<section id="readers-namespace">
+<h2>Readers Namespace<a class="headerlink" href="#readers-namespace" title="Link to this heading"></a></h2>
+<section id="clase-excelreadernpoi">
+<h3>Clase <code class="docutils literal notranslate"><span class="pre">ExcelReaderNPOI</span></code><a class="headerlink" href="#clase-excelreadernpoi" title="Link to this heading"></a></h3>
+<p>Implementa <code class="docutils literal notranslate"><span class="pre">IDisposable</span></code>. Wrapper sobre la librería NPOI para acceso a archivos XLS/XLSX.</p>
+<p><strong>Propiedades:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FieldCount</span></code> (int): Número máximo de columnas detectadas en la hoja actual.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SheetName</span></code> (string): Nombre de la pestaña activa.</p></li>
+</ul>
+<p><strong>Métodos Públicos:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">MoveToNextSheet()</span></code>: Avanza el cursor a la siguiente hoja del libro. Reinicia el enumerador de filas.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">ReadRow()</span></code>: Avanza el iterador a la siguiente fila física. Devuelve <code class="docutils literal notranslate"><span class="pre">false</span></code> al final.</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">object</span> <span class="pre">GetValue(int</span> <span class="pre">index)</span></code>:</dt><dd><ul>
+<li><p>Recupera el valor de la celda en el índice dado.</p></li>
+<li><p><strong>Manejo de Errores:</strong> Captura excepciones de celda corrupta y devuelve cadena vacía.</p></li>
+<li><p><strong>Fórmulas:</strong> Evalúa <code class="docutils literal notranslate"><span class="pre">CachedFormulaResultType</span></code> para devolver el valor pre-calculado.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="clase-odsreader">
+<h3>Clase <code class="docutils literal notranslate"><span class="pre">OdsReader</span></code><a class="headerlink" href="#clase-odsreader" title="Link to this heading"></a></h3>
+<p>Implementa <code class="docutils literal notranslate"><span class="pre">IDisposable</span></code>. Lector de alto rendimiento para formato OpenDocument.</p>
+<p><strong>Detalles de Implementación:</strong>
+Utiliza <code class="docutils literal notranslate"><span class="pre">System.IO.Compression.ZipArchive</span></code> para acceder al stream <code class="docutils literal notranslate"><span class="pre">content.xml</span></code>.</p>
+<ul class="simple">
+<li><p><strong>SpanBuffer:</strong> <code class="docutils literal notranslate"><span class="pre">Dictionary&lt;int,</span> <span class="pre">(object,</span> <span class="pre">int)&gt;</span></code>. Buffer interno para gestionar celdas que ocupan múltiples filas (<cite>row-span</cite>).</p></li>
+<li><p><strong>Limitaciones:</strong> Acceso unidireccional (Forward-only). No soporta saltos aleatorios a filas anteriores.</p></li>
+</ul>
+</section>
+</section>
+<section id="ui-namespace">
+<h2>UI Namespace<a class="headerlink" href="#ui-namespace" title="Link to this heading"></a></h2>
+<section id="clase-mainmenu-controlador">
+<h3>Clase <code class="docutils literal notranslate"><span class="pre">MainMenu</span></code> (Controlador)<a class="headerlink" href="#clase-mainmenu-controlador" title="Link to this heading"></a></h3>
+<p>Hereda de <code class="docutils literal notranslate"><span class="pre">Godot.Control</span></code>.
+Gestiona la inyección de dependencias, el ciclo de vida de la aplicación y la cola de procesamiento.</p>
+<p><strong>Estructuras Anidadas:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">DetectedColumn</span></code>: Define la meta-información de una columna (Nombre, Tipo, Longitud).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">ForgeTicket</span></code>: Objeto que encapsula todo el trabajo necesario para exportar un archivo (Source -&gt; Destination + Schema).</p></li>
+</ul>
+</section>
+<section id="clase-sheetcard-componente">
+<h3>Clase <code class="docutils literal notranslate"><span class="pre">SheetCard</span></code> (Componente)<a class="headerlink" href="#clase-sheetcard-componente" title="Link to this heading"></a></h3>
+<p>Hereda de <code class="docutils literal notranslate"><span class="pre">Godot.PanelContainer</span></code>.
+Representa visualmente un archivo en la cola de procesamiento.</p>
+<p><strong>Eventos:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">OnManualFormatChange</span></code>: Disparado cuando el usuario cambia el formato de salida en el dropdown, usado para sincronización con el control maestro.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sistema_logs_forense.html" class="btn btn-neutral float-left" title="Sistema de Logs Forense y Auditoría" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, YirehStudios.
+      <span class="lastupdated">Last updated on True.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

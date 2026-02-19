@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía de Resolución de Problemas (Troubleshooting) &mdash; BD Forge (Data Hopper) vE 2.0.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e51e059b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Arquitectura del Sistema y Núcleo de Procesamiento" href="arquitectura_tecnica.html" />
+    <link rel="prev" title="Manual del Operador" href="manual_usuario.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BD Forge (Data Hopper)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">📘 Manual del Operador</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="manual_usuario.html">Manual del Operador</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Guía de Resolución de Problemas (Troubleshooting)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#errores-de-archivo-y-sistema">Errores de Archivo y Sistema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#error-el-proceso-no-puede-acceder-al-archivo-porque-esta-siendo-utilizado">Error: “El proceso no puede acceder al archivo porque está siendo utilizado”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-memory-limit-exceeded-o-cierre-inesperado">Error: “Memory Limit Exceeded” o Cierre Inesperado</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#anomalias-de-datos">Anomalías de Datos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#columnas-fantasmas-o-vacias">Columnas “Fantasmas” o vacías</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fechas-con-formato-incorrecto-dia-mes-invertido">Fechas con formato incorrecto (Día/Mes invertido)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">⚙️ Arquitectura e Ingeniería</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arquitectura_tecnica.html">Arquitectura del Sistema y Núcleo de Procesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motor_inferencia.html">Motor de Inferencia Estadística (Stride Sampling)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sistema_logs_forense.html">Sistema de Logs Forense y Auditoría</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">💻 Desarrollo (DevOps)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="referencia_api.html">Referencia de API del Núcleo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BD Forge (Data Hopper)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Guía de Resolución de Problemas (Troubleshooting)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/resolucion_problemas.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="guia-de-resolucion-de-problemas-troubleshooting">
+<h1>Guía de Resolución de Problemas (Troubleshooting)<a class="headerlink" href="#guia-de-resolucion-de-problemas-troubleshooting" title="Link to this heading"></a></h1>
+<p>Diagnóstico y solución de errores comunes reportados por el motor de BD Forge.</p>
+<section id="errores-de-archivo-y-sistema">
+<h2>Errores de Archivo y Sistema<a class="headerlink" href="#errores-de-archivo-y-sistema" title="Link to this heading"></a></h2>
+<section id="error-el-proceso-no-puede-acceder-al-archivo-porque-esta-siendo-utilizado">
+<h3>Error: “El proceso no puede acceder al archivo porque está siendo utilizado”<a class="headerlink" href="#error-el-proceso-no-puede-acceder-al-archivo-porque-esta-siendo-utilizado" title="Link to this heading"></a></h3>
+<p><strong>Código de Error:</strong> <cite>System.IO.IOException</cite> (Sharing violation).</p>
+<ul class="simple">
+<li><p><strong>Síntoma:</strong> El indicador de estado se pone rojo (ERROR) inmediatamente al intentar procesar.</p></li>
+<li><p><strong>Causa Técnica:</strong> BD Forge intenta abrir el archivo con <cite>FileShare.ReadWrite</cite>. Sin embargo, si Excel está editando una celda activamente (cursor parpadeando), bloquea el archivo de manera exclusiva.</p></li>
+<li><dl class="simple">
+<dt><strong>Solución:</strong></dt><dd><ol class="arabic simple">
+<li><p>Guarde los cambios en Excel.</p></li>
+<li><p>Salga del modo de edición de celda (presione ESC o Enter).</p></li>
+<li><p>No es necesario cerrar Excel, solo asegurar que no haya celdas activas.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="error-memory-limit-exceeded-o-cierre-inesperado">
+<h3>Error: “Memory Limit Exceeded” o Cierre Inesperado<a class="headerlink" href="#error-memory-limit-exceeded-o-cierre-inesperado" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Síntoma:</strong> La aplicación se cierra sin mensaje al cargar un archivo Excel muy grande (&gt;50MB).</p></li>
+<li><p><strong>Causa:</strong> El lector NPOI carga todo el DOM en memoria. Un archivo de 50MB en disco puede expandirse a 2GB de objetos en RAM.</p></li>
+<li><dl class="simple">
+<dt><strong>Solución:</strong></dt><dd><ul>
+<li><p>Guarde el archivo como <strong>.ODS (OpenDocument Spreadsheet)</strong> en Excel o LibreOffice.</p></li>
+<li><p>BD Forge procesará el archivo ODS usando el modo <em>Streaming</em>, consumiendo menos de 500MB de RAM incluso para millones de filas.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+<section id="anomalias-de-datos">
+<h2>Anomalías de Datos<a class="headerlink" href="#anomalias-de-datos" title="Link to this heading"></a></h2>
+<section id="columnas-fantasmas-o-vacias">
+<h3>Columnas “Fantasmas” o vacías<a class="headerlink" href="#columnas-fantasmas-o-vacias" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Síntoma:</strong> Aparecen columnas llamadas “F12”, “F13” sin datos.</p></li>
+<li><p><strong>Causa:</strong> Excel a menudo mantiene referencias a celdas que fueron borradas pero cuyo formato persiste.</p></li>
+<li><p><strong>Comportamiento de BD Forge:</strong> El sistema detecta estas columnas durante el muestreo. Si la columna está vacía en la muestra de 200 filas, se marca automáticamente como deshabilitada (Ghost Column). Puede reactivarla manualmente en la configuración si sabe que hay datos más adelante.</p></li>
+</ul>
+</section>
+<section id="fechas-con-formato-incorrecto-dia-mes-invertido">
+<h3>Fechas con formato incorrecto (Día/Mes invertido)<a class="headerlink" href="#fechas-con-formato-incorrecto-dia-mes-invertido" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Causa:</strong> El archivo de texto/CSV tiene fechas en formato <cite>dd/mm/yyyy</cite> pero el servidor donde corre BD Forge está configurado en Inglés (<cite>mm/dd/yyyy</cite>).</p></li>
+<li><dl class="simple">
+<dt><strong>Solución:</strong></dt><dd><ol class="arabic simple">
+<li><p>Cambie el tipo de dato de la columna a <strong>Character</strong> en la ficha de configuración.</p></li>
+<li><p>Exporte el archivo.</p></li>
+<li><p>Realice la conversión de fecha en su motor de base de datos destino (SQL) usando una función determinista (ej. <cite>CONVERT(date, campo, 103)</cite>).</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="manual_usuario.html" class="btn btn-neutral float-left" title="Manual del Operador" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="arquitectura_tecnica.html" class="btn btn-neutral float-right" title="Arquitectura del Sistema y Núcleo de Procesamiento" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, YirehStudios.
+      <span class="lastupdated">Last updated on True.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

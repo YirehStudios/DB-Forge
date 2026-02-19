@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b1nmo35dr1vd0"]
+
+[ext_resource type="FontFile" uid="uid://e3didfmj86e1" path="res://Recursos/Nueva carpeta/coolvetica/Coolvetica Rg It.otf" id="1_n5wax"]
+
+[resource]
+font = ExtResource("1_n5wax")
+font_color = Color(0, 0, 0, 0.53333336)

@@ -1,0 +1,168 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arquitectura de Motores de Lectura &mdash; BD Forge (Data Hopper) vE 2.0.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e51e059b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BD Forge (Data Hopper)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">📘 Manual del Operador</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_usuario.html">Manual del Operador</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolucion_problemas.html">Guía de Resolución de Problemas (Troubleshooting)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">⚙️ Arquitectura e Ingeniería</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arquitectura_tecnica.html">Arquitectura del Sistema y Núcleo de Procesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motor_inferencia.html">Motor de Inferencia Estadística (Stride Sampling)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sistema_logs_forense.html">Sistema de Logs Forense y Auditoría</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">💻 Desarrollo (DevOps)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="referencia_api.html">Referencia de API del Núcleo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BD Forge (Data Hopper)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Arquitectura de Motores de Lectura</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/arquitectura_lectores.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="arquitectura-de-motores-de-lectura">
+<h1>Arquitectura de Motores de Lectura<a class="headerlink" href="#arquitectura-de-motores-de-lectura" title="Link to this heading"></a></h1>
+<p>BD Forge utiliza una estrategia de “fábrica de lectores” para instanciar el motor más adecuado según la extensión del archivo.</p>
+<section id="lector-excel-npoi-dom-heap-intensive">
+<h2>1. Lector Excel NPOI (DOM / Heap-Intensive)<a class="headerlink" href="#lector-excel-npoi-dom-heap-intensive" title="Link to this heading"></a></h2>
+<p>Ubicación: <code class="docutils literal notranslate"><span class="pre">DbfForge.Core.Readers.ExcelReaderNPOI.cs</span></code></p>
+<p>Este lector está diseñado para la complejidad de Microsoft Excel. Carga todo el archivo en memoria (DOM) para permitir el acceso aleatorio necesario para resolver fórmulas y referencias.</p>
+<section id="algoritmo-de-desagrupacion-the-unmerge-logic">
+<h3>Algoritmo de Desagrupación (The Unmerge Logic)<a class="headerlink" href="#algoritmo-de-desagrupacion-the-unmerge-logic" title="Link to this heading"></a></h3>
+<p>Excel guarda las celdas combinadas como metadatos de “Regiones”, dejando las celdas hijas vacías físicamente. BD Forge reconstruye la integridad tabular:</p>
+<ol class="arabic simple">
+<li><p><strong>Mapeo (Pre-Scan):</strong> Al abrir la hoja, se itera sobre <code class="docutils literal notranslate"><span class="pre">sheet.MergedRegions</span></code>.</p></li>
+<li><p><strong>Indexación:</strong> Se construye un <code class="docutils literal notranslate"><span class="pre">Dictionary&lt;string,</span> <span class="pre">ICell&gt;</span> <span class="pre">_mergedCellsMap</span></code>.
+* <em>Clave:</em> Coordenada “Fila_Columna” de cada celda hija.
+* <em>Valor:</em> Referencia al objeto <code class="docutils literal notranslate"><span class="pre">ICell</span></code> de la celda padre (Top-Left).</p></li>
+<li><p><strong>Intercepción:</strong> En el método <code class="docutils literal notranslate"><span class="pre">GetValue(int</span> <span class="pre">index)</span></code>, se consulta el diccionario. Si la coordenada existe, se desvía la lectura al padre.</p></li>
+</ol>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Lógica simplificada del mapeo</span>
+<span class="kt">string</span><span class="w"> </span><span class="n">mergeKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$&quot;{rowIndex}_{index}&quot;</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_mergedCellsMap</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="n">mergeKey</span><span class="p">))</span>
+<span class="w">    </span><span class="n">cell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_mergedCellsMap</span><span class="p">[</span><span class="n">mergeKey</span><span class="p">];</span><span class="w"> </span><span class="c1">// Redirección de puntero</span>
+</pre></div>
+</div>
+</section>
+<section id="recuperacion-de-tiempos-negativos">
+<h3>Recuperación de Tiempos Negativos<a class="headerlink" href="#recuperacion-de-tiempos-negativos" title="Link to this heading"></a></h3>
+<p>Excel muestra tiempos negativos (ej. “-10:00”) como <code class="docutils literal notranslate"><span class="pre">#####</span></code>.
+* <strong>Solución Técnica:</strong> El lector accede a la propiedad <code class="docutils literal notranslate"><span class="pre">NumericCellValue</span></code> cruda (que es un <cite>double</cite> representando días, ej. <cite>-0.41</cite>) y reconstruye matemáticamente el string de tiempo usando <code class="docutils literal notranslate"><span class="pre">TimeSpan.FromDays()</span></code>, ignorando la máscara visual de Excel.</p>
+</section>
+</section>
+<section id="lector-opendocument-streaming-low-memory">
+<h2>2. Lector OpenDocument (Streaming / Low-Memory)<a class="headerlink" href="#lector-opendocument-streaming-low-memory" title="Link to this heading"></a></h2>
+<p>Ubicación: <code class="docutils literal notranslate"><span class="pre">DbfForge.Core.Readers.OdsReader.cs</span></code></p>
+<p>Diseñado para <em>Big Data</em> en escritorio. Un archivo ODS es un ZIP que contiene un XML (<code class="docutils literal notranslate"><span class="pre">content.xml</span></code>).</p>
+<section id="estrategia-de-flujo-forward-only">
+<h3>Estrategia de Flujo (Forward-Only)<a class="headerlink" href="#estrategia-de-flujo-forward-only" title="Link to this heading"></a></h3>
+<p>En lugar de descomprimir todo el XML en RAM (lo cual colapsaría con archivos grandes), utilizamos <code class="docutils literal notranslate"><span class="pre">System.Xml.XmlReader</span></code>.
+* <strong>Ventaja:</strong> Consumo de RAM O(1). No importa si el archivo tiene 1,000 o 1,000,000 de filas, la memoria usada es constante (~50-100MB).
+* <strong>Desventaja:</strong> No se puede volver atrás. La inferencia de tipos debe hacerse en una sola pasada o requiere reabrir el flujo.</p>
+</section>
+<section id="el-problema-de-number-columns-repeated">
+<h3>El Problema de “Number-Columns-Repeated”<a class="headerlink" href="#el-problema-de-number-columns-repeated" title="Link to this heading"></a></h3>
+<p>El formato ODS comprime celdas repetidas. Una fila con 1000 celdas vacías se guarda como un solo nodo XML: <code class="docutils literal notranslate"><span class="pre">&lt;table:table-cell</span> <span class="pre">number-columns-repeated=&quot;1000&quot;</span> <span class="pre">/&gt;</span></code>.</p>
+<p><strong>El Buffer de Expansión (`_spanBuffer`):</strong>
+El lector implementa una máquina de estados que “inyecta” celdas virtuales.</p>
+<ol class="arabic simple">
+<li><p>Al leer un nodo con repetición, se calcula el contador.</p></li>
+<li><p>Un bucle <code class="docutils literal notranslate"><span class="pre">for</span></code> emite el valor N veces hacia el array de la fila actual (<cite>_currentRow</cite>).</p></li>
+<li><p><strong>Manejo de Spans Verticales:</strong> Si una celda tiene <code class="docutils literal notranslate"><span class="pre">number-rows-spanned</span></code>, se guarda en un <code class="docutils literal notranslate"><span class="pre">Dictionary&lt;int,</span> <span class="pre">(object,</span> <span class="pre">int)&gt;</span></code> (Buffer de Spans).</p></li>
+<li><p>En las filas subsiguientes, antes de leer el XML, el lector consulta el Buffer e inyecta los valores “fantasma” que vienen de filas superiores, manteniendo la alineación perfecta de la tabla.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, YirehStudios.
+      <span class="lastupdated">Last updated on True.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

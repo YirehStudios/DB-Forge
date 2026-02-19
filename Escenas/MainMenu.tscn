@@ -1,0 +1,1126 @@
+[gd_scene format=3 uid="uid://q7rfhrkqg8de"]
+
+[ext_resource type="Script" uid="uid://lpmfwypsxpw7" path="res://Script/MainMenu.cs" id="1_y57nq"]
+[ext_resource type="PackedScene" uid="uid://3hh47q0qnktd" path="res://Escenas/SheetCard.tscn" id="2_uy6a2"]
+[ext_resource type="Texture2D" uid="uid://ykpobnr35cmc" path="res://Recursos/Imagenes/Logo/DB_Forge_Logov3.png" id="3_ik8kc"]
+[ext_resource type="FontFile" uid="uid://cb2k130bwyxny" path="res://Recursos/Inter/static/Inter_18pt-Bold.ttf" id="4_font_bold"]
+[ext_resource type="FontFile" uid="uid://cml4jgtomju2o" path="res://Recursos/Inter/static/Inter_18pt-Medium.ttf" id="5_font_med"]
+[ext_resource type="Texture2D" uid="uid://7b0whf1b816u" path="res://Recursos/Imagenes/Icons/Clean.png" id="6_2ahv8"]
+[ext_resource type="Texture2D" uid="uid://dil1tkrb8m2uv" path="res://Recursos/Imagenes/Icons/SelectFolder.png" id="6_8shpa"]
+[ext_resource type="FontFile" uid="uid://bu7nhdf4bc48l" path="res://Recursos/Inter/static/Inter_18pt-Regular.ttf" id="6_font_reg"]
+[ext_resource type="StyleBox" uid="uid://dpyn8w7luslgh" path="res://Recursos/Trees/Button/NormalButtonSidebar.tres" id="6_v3q7a"]
+[ext_resource type="StyleBox" uid="uid://dj2j6s3uhdeca" path="res://Recursos/Trees/Button/PressedButtonSidebar.tres" id="7_p3qnj"]
+[ext_resource type="StyleBox" uid="uid://8ygh8oy8pcl7" path="res://Recursos/Trees/Button/HoverButtonSidebar.tres" id="8_lun8r"]
+[ext_resource type="Texture2D" uid="uid://ffbv776pxtpa" path="res://Recursos/Imagenes/Icons/Logs.png" id="8_m10g6"]
+[ext_resource type="Texture2D" uid="uid://b60c3683j466g" path="res://Recursos/Imagenes/Icons/Config.png" id="9_ik8kc"]
+[ext_resource type="Texture2D" uid="uid://ctr4dx0qnrji4" path="res://Recursos/Imagenes/Icons/Info.png" id="10_arsku"]
+[ext_resource type="FontFile" uid="uid://33twegjosbjm" path="res://Recursos/Inter/static/Inter_28pt-Bold.ttf" id="12_1btkb"]
+[ext_resource type="FontFile" uid="uid://c33skl420gog0" path="res://Recursos/Inter/static/Inter_28pt-Black.ttf" id="12_ndbmv"]
+[ext_resource type="Texture2D" uid="uid://danmj7oqigm0q" path="res://Recursos/Imagenes/Icons/Help.png" id="13_g58n8"]
+[ext_resource type="Texture2D" uid="uid://ilqi5ygl76yv" path="res://Recursos/Imagenes/Logo/LogoYireh256.png.png" id="14_ndbmv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_App_Bg"]
+bg_color = Color(0.02, 0.02, 0.03, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Sidebar_Panel"]
+bg_color = Color(0.05, 0.05, 0.06, 1)
+border_width_right = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_Brand"]
+font = ExtResource("4_font_bold")
+font_color = Color(0.95, 0.95, 0.95, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Category_Lbl"]
+content_margin_left = 16.0
+content_margin_top = 24.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_Sidebar_Cat"]
+font = ExtResource("4_font_bold")
+font_size = 11
+font_color = Color(0.35, 0.35, 0.4, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Header"]
+bg_color = Color(0.05, 0.05, 0.06, 0.95)
+border_width_bottom = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_Counter"]
+font = ExtResource("5_font_med")
+font_size = 13
+font_color = Color(0.6, 0.6, 0.65, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Btn_Icon_Normal"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.2, 0.25, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Btn_Icon_Hover"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 0.05)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.4, 0.45, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Footer"]
+bg_color = Color(0.08, 0.08, 0.09, 1)
+border_width_top = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Footer_Path"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+bg_color = Color(0.03, 0.03, 0.04, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Prog_Bg"]
+bg_color = Color(0.02, 0.02, 0.03, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Prog_Fill"]
+bg_color = Color(0.0627451, 0.72549, 0.505882, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Primary_Normal"]
+bg_color = Color(0.9, 0.9, 0.92, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0.0627451, 0.72549, 0.505882, 0.1)
+shadow_size = 8
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Primary_Pressed"]
+bg_color = Color(0.8, 0.8, 0.82, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Primary_Hover"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0.0627451, 0.72549, 0.505882, 0.3)
+shadow_size = 12
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_DropZone"]
+bg_color = Color(0.02, 0.02, 0.03, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.2, 0.25, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_DropTitle"]
+font = ExtResource("4_font_bold")
+font_size = 20
+font_color = Color(0.8, 0.8, 0.85, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_DropSub"]
+font = ExtResource("6_font_reg")
+font_size = 14
+font_color = Color(0.4, 0.4, 0.45, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Inspector_Bg"]
+bg_color = Color(0.08, 0.08, 0.09, 1)
+border_width_left = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 50
+shadow_offset = Vector2(-10, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Inspector_Header"]
+content_margin_left = 20.0
+content_margin_top = 15.0
+content_margin_right = 20.0
+content_margin_bottom = 15.0
+bg_color = Color(0.05, 0.05, 0.06, 1)
+border_width_bottom = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Log_Panel"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.03, 0.03, 0.04, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Toast"]
+bg_color = Color(0.08, 0.08, 0.1, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.2, 0.25, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 12
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="Animation" id="Anim_Close"]
+resource_name = "CloseInspector"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InspectorPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(259, 0), Vector2(10000, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InspectorOverlay:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InspectorOverlay:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Anim_Open"]
+resource_name = "OpenInspector"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InspectorPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector2(10000, 0), Vector2(259, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InspectorOverlay:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InspectorOverlay:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Anim_Reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InspectorPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10000, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InspectorOverlay:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InspectorOverlay:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="Lib_Menu"]
+_data = {
+&"CloseInspector": SubResource("Anim_Close"),
+&"OpenInspector": SubResource("Anim_Open"),
+&"RESET": SubResource("Anim_Reset")
+}
+
+[node name="MainMenu" type="Control" unique_id=1875393489 node_paths=PackedStringArray("SheetListVBox", "ProcessFilesBtn", "LoadingToast", "ProcessingLabel", "OpenFileDialog", "MergeSwitch", "ClearQueueBtn", "FileQueueLabel", "DropZonePanel", "BrowseFilesBtn", "PathLabel", "ChangePathBtn", "MasterFormatDropdown", "MergeFilenameInput", "GlobalProgressBar", "OpenOutputBtn", "ClearAllBtn", "ViewLogsBtn", "SettingsBtn", "HelpBtn", "AboutBtn", "SettingsView", "DarkModeSwitch", "LogsView", "LogRichText", "AboutView", "InspectorOverlay", "InspectorPanel", "CloseInspectorBtn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y57nq")
+SheetCardPrefab = ExtResource("2_uy6a2")
+SheetListVBox = NodePath("MainHSplit/WorkspacePanel/MainContentVBox/FileScrollContainer/SheetListVBox")
+ProcessFilesBtn = NodePath("MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/ProcessFilesBtn")
+LoadingToast = NodePath("LoadingToast")
+ProcessingLabel = NodePath("LoadingToast/Margin/HBox/VBox/ProcessingLabel")
+OpenFileDialog = NodePath("OpenFileDialog")
+MergeSwitch = NodePath("MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceHeader/Margin/HBox/MergeSwitch")
+ClearQueueBtn = NodePath("MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceHeader/Margin/HBox/ClearQueueBtn")
+FileQueueLabel = NodePath("MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceHeader/Margin/HBox/FileQueueLabel")
+DropZonePanel = NodePath("MainHSplit/WorkspacePanel/EmptyStateCenter/DropZonePanel")
+BrowseFilesBtn = NodePath("MainHSplit/WorkspacePanel/EmptyStateCenter/DropZonePanel/VBox/BrowseFilesBtn")
+PathLabel = NodePath("MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/OutputLocationGroup/VBox/PathDisplayPanel/PathLabel")
+ChangePathBtn = NodePath("MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/OutputLocationGroup/ChangePathBtn")
+MasterFormatDropdown = NodePath("MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/FormatSelectionGroup/MasterFormatDropdown")
+MergeFilenameInput = NodePath("MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/OutputLocationGroup/MergeFilenameInput")
+GlobalProgressBar = NodePath("MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/GlobalProgressBar")
+OpenOutputBtn = NodePath("MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu/OpenOutputBtn")
+ClearAllBtn = NodePath("MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu/ClearAllBtn")
+ViewLogsBtn = NodePath("MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu/ViewLogsBtn")
+SettingsBtn = NodePath("MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu/SettingsBtn")
+HelpBtn = NodePath("MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu/HelpBtn")
+AboutBtn = NodePath("MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu/AboutBtn")
+SettingsView = NodePath("InspectorPanel/DrawerContent/SettingsView")
+DarkModeSwitch = NodePath("InspectorPanel/DrawerContent/SettingsView/VBox/DarkModeSwitch")
+LogsView = NodePath("InspectorPanel/DrawerContent/LogsView")
+LogRichText = NodePath("InspectorPanel/DrawerContent/LogsView/LogContentPanel/Scroll/Margin/LogRichText")
+AboutView = NodePath("InspectorPanel/DrawerContent/AboutView")
+InspectorOverlay = NodePath("InspectorOverlay")
+InspectorPanel = NodePath("InspectorPanel")
+CloseInspectorBtn = NodePath("InspectorPanel/DrawerContent/Header/HBox/CloseInspectorBtn")
+
+[node name="OpenFileDialog" type="FileDialog" parent="." unique_id=1213881570]
+title = "Open File(s)"
+initial_position = 2
+size = Vector2i(800, 600)
+ok_button_text = "Open"
+file_mode = 1
+access = 2
+filters = PackedStringArray("*.xlsx, *.xls, *.ods, *.csv, *.txt, *.dbf ; Data Sheets")
+use_native_dialog = true
+
+[node name="BackgroundPanel" type="PanelContainer" parent="." unique_id=1862403555]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_App_Bg")
+
+[node name="MainHSplit" type="HSplitContainer" parent="." unique_id=825755785]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(260)
+split_offset = 260
+
+[node name="SidebarPanel" type="PanelContainer" parent="MainHSplit" unique_id=284928529]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Sidebar_Panel")
+
+[node name="SidebarLayout" type="VBoxContainer" parent="MainHSplit/SidebarPanel" unique_id=1438724302]
+layout_mode = 2
+
+[node name="BrandHeader" type="Control" parent="MainHSplit/SidebarPanel/SidebarLayout" unique_id=1211522818]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Logo" type="TextureRect" parent="MainHSplit/SidebarPanel/SidebarLayout/BrandHeader" unique_id=2117921571]
+modulate = Color(1, 1, 1, 0.9)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -16.0
+offset_right = 56.0
+offset_bottom = 16.0
+grow_vertical = 2
+texture = ExtResource("3_ik8kc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MainHSplit/SidebarPanel/SidebarLayout/BrandHeader" unique_id=416593944]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 68.0
+offset_top = -11.0
+offset_right = 158.0
+offset_bottom = 12.0
+grow_vertical = 2
+text = "DB FORGE"
+label_settings = SubResource("LabelSettings_Brand")
+
+[node name="SidebarMenu" type="VBoxContainer" parent="MainHSplit/SidebarPanel/SidebarLayout" unique_id=330541508]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="ShortcutsLabel" type="Label" parent="MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu" unique_id=581636833]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBox_Category_Lbl")
+text = "SHORTCUTS"
+label_settings = SubResource("LabelSettings_Sidebar_Cat")
+
+[node name="OpenOutputBtn" type="Button" parent="MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu" unique_id=244208678]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 18
+theme_override_fonts/font = ExtResource("5_font_med")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = ExtResource("6_v3q7a")
+theme_override_styles/pressed = ExtResource("7_p3qnj")
+theme_override_styles/hover = ExtResource("8_lun8r")
+text = "Open Output"
+icon = ExtResource("6_8shpa")
+alignment = 0
+expand_icon = true
+
+[node name="ClearAllBtn" type="Button" parent="MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu" unique_id=1821828389]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 18
+theme_override_fonts/font = ExtResource("5_font_med")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = ExtResource("6_v3q7a")
+theme_override_styles/pressed = ExtResource("7_p3qnj")
+theme_override_styles/hover = ExtResource("8_lun8r")
+text = "Clear All"
+icon = ExtResource("6_2ahv8")
+alignment = 0
+expand_icon = true
+
+[node name="SystemLabel" type="Label" parent="MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu" unique_id=651575309]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBox_Category_Lbl")
+text = "SYSTEM"
+label_settings = SubResource("LabelSettings_Sidebar_Cat")
+
+[node name="ViewLogsBtn" type="Button" parent="MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu" unique_id=837719675]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 18
+theme_override_fonts/font = ExtResource("5_font_med")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = ExtResource("6_v3q7a")
+theme_override_styles/pressed = ExtResource("7_p3qnj")
+theme_override_styles/hover = ExtResource("8_lun8r")
+text = "View Logs"
+icon = ExtResource("8_m10g6")
+alignment = 0
+expand_icon = true
+
+[node name="SettingsBtn" type="Button" parent="MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu" unique_id=1593500812]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 18
+theme_override_fonts/font = ExtResource("5_font_med")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = ExtResource("6_v3q7a")
+theme_override_styles/pressed = ExtResource("7_p3qnj")
+theme_override_styles/hover = ExtResource("8_lun8r")
+text = "Settings"
+icon = ExtResource("9_ik8kc")
+alignment = 0
+expand_icon = true
+
+[node name="HelpBtn" type="Button" parent="MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu" unique_id=82323780]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7019608, 0.7019608, 0.7490196, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 18
+theme_override_fonts/font = ExtResource("5_font_med")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = ExtResource("6_v3q7a")
+theme_override_styles/pressed = ExtResource("7_p3qnj")
+theme_override_styles/hover = ExtResource("8_lun8r")
+text = "Help"
+icon = ExtResource("13_g58n8")
+alignment = 0
+expand_icon = true
+
+[node name="AboutBtn" type="Button" parent="MainHSplit/SidebarPanel/SidebarLayout/SidebarMenu" unique_id=2101905298]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 18
+theme_override_fonts/font = ExtResource("5_font_med")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = ExtResource("6_v3q7a")
+theme_override_styles/pressed = ExtResource("7_p3qnj")
+theme_override_styles/hover = ExtResource("8_lun8r")
+text = "About"
+icon = ExtResource("10_arsku")
+alignment = 0
+expand_icon = true
+
+[node name="WorkspacePanel" type="PanelContainer" parent="MainHSplit" unique_id=225050585]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_App_Bg")
+
+[node name="MainContentVBox" type="VBoxContainer" parent="MainHSplit/WorkspacePanel" unique_id=921522998]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="WorkspaceHeader" type="PanelContainer" parent="MainHSplit/WorkspacePanel/MainContentVBox" unique_id=1002449818]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Header")
+
+[node name="Margin" type="MarginContainer" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceHeader" unique_id=364555111]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 16
+
+[node name="HBox" type="HBoxContainer" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceHeader/Margin" unique_id=1666755613]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FileQueueLabel" type="Label" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceHeader/Margin/HBox" unique_id=2050452519]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Files in queue: 0"
+label_settings = SubResource("LabelSettings_Counter")
+
+[node name="MergeSwitch" type="CheckButton" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceHeader/Margin/HBox" unique_id=879780831]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+text = "Merge All"
+
+[node name="VSeparator" type="VSeparator" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceHeader/Margin/HBox" unique_id=689603052]
+layout_mode = 2
+
+[node name="ClearQueueBtn" type="Button" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceHeader/Margin/HBox" unique_id=1474297303]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "Clear List"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBox_Btn_Icon_Normal")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Icon_Hover")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Icon_Hover")
+icon = ExtResource("6_2ahv8")
+icon_alignment = 1
+expand_icon = true
+
+[node name="FileScrollContainer" type="ScrollContainer" parent="MainHSplit/WorkspacePanel/MainContentVBox" unique_id=528176518]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="SheetListVBox" type="VBoxContainer" parent="MainHSplit/WorkspacePanel/MainContentVBox/FileScrollContainer" unique_id=899057011]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="WorkspaceFooter" type="PanelContainer" parent="MainHSplit/WorkspacePanel/MainContentVBox" unique_id=693638145]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Footer")
+
+[node name="Margin" type="MarginContainer" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter" unique_id=1100649614]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 20
+
+[node name="HBox" type="HBoxContainer" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin" unique_id=2096201513]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="OutputLocationGroup" type="HBoxContainer" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox" unique_id=391613433]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="VBox" type="VBoxContainer" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/OutputLocationGroup" unique_id=1608192322]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/OutputLocationGroup/VBox" unique_id=1623607963]
+layout_mode = 2
+text = "Output Folder"
+label_settings = SubResource("LabelSettings_Sidebar_Cat")
+
+[node name="PathDisplayPanel" type="PanelContainer" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/OutputLocationGroup/VBox" unique_id=951734865]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Footer_Path")
+
+[node name="PathLabel" type="Label" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/OutputLocationGroup/VBox/PathDisplayPanel" unique_id=1604788195]
+layout_mode = 2
+text = "C:/Users/..."
+label_settings = SubResource("LabelSettings_Counter")
+clip_text = true
+
+[node name="MergeFilenameInput" type="LineEdit" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/OutputLocationGroup" unique_id=1143755602]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+placeholder_text = "Merge Filename"
+flat = true
+
+[node name="ChangePathBtn" type="Button" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/OutputLocationGroup" unique_id=939508822]
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
+text = "Change..."
+flat = true
+
+[node name="VSeparator" type="VSeparator" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox" unique_id=41137090]
+layout_mode = 2
+
+[node name="FormatSelectionGroup" type="HBoxContainer" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox" unique_id=1522509789]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/FormatSelectionGroup" unique_id=666399511]
+layout_mode = 2
+text = "Format:"
+label_settings = SubResource("LabelSettings_Counter")
+
+[node name="MasterFormatDropdown" type="OptionButton" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox/FormatSelectionGroup" unique_id=1480793765]
+custom_minimum_size = Vector2(140, 36)
+layout_mode = 2
+size_flags_vertical = 4
+selected = 0
+item_count = 4
+popup/item_0/text = "[ Individual ]"
+popup/item_0/id = 99
+popup/item_1/text = "DBF (dBase)"
+popup/item_1/id = 0
+popup/item_2/text = "Excel (.xlsx)"
+popup/item_2/id = 1
+popup/item_3/text = "CSV (Text)"
+popup/item_3/id = 2
+
+[node name="VSeparator2" type="VSeparator" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox" unique_id=1522509790]
+layout_mode = 2
+
+[node name="GlobalProgressBar" type="ProgressBar" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox" unique_id=200215790]
+custom_minimum_size = Vector2(150, 8)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBox_Prog_Bg")
+theme_override_styles/fill = SubResource("StyleBox_Prog_Fill")
+show_percentage = false
+
+[node name="ProcessFilesBtn" type="Button" parent="MainHSplit/WorkspacePanel/MainContentVBox/WorkspaceFooter/Margin/HBox" unique_id=1453381063]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_font_bold")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBox_Primary_Normal")
+theme_override_styles/pressed = SubResource("StyleBox_Primary_Pressed")
+theme_override_styles/hover = SubResource("StyleBox_Primary_Hover")
+text = "PROCESS FILES"
+
+[node name="EmptyStateCenter" type="CenterContainer" parent="MainHSplit/WorkspacePanel" unique_id=1951815489]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DropZonePanel" type="PanelContainer" parent="MainHSplit/WorkspacePanel/EmptyStateCenter" unique_id=547811931]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_DropZone")
+
+[node name="VBox" type="VBoxContainer" parent="MainHSplit/WorkspacePanel/EmptyStateCenter/DropZonePanel" unique_id=976164272]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MainHSplit/WorkspacePanel/EmptyStateCenter/DropZonePanel/VBox" unique_id=897860946]
+modulate = Color(1, 1, 1, 0.15)
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_ik8kc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MainHSplit/WorkspacePanel/EmptyStateCenter/DropZonePanel/VBox" unique_id=1526072413]
+layout_mode = 2
+text = "Drag your files here"
+label_settings = SubResource("LabelSettings_DropTitle")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MainHSplit/WorkspacePanel/EmptyStateCenter/DropZonePanel/VBox" unique_id=992607241]
+layout_mode = 2
+text = "Supports .xlsx, .dbf, .csv, .txt, .ods"
+label_settings = SubResource("LabelSettings_DropSub")
+horizontal_alignment = 1
+
+[node name="BrowseFilesBtn" type="Button" parent="MainHSplit/WorkspacePanel/EmptyStateCenter/DropZonePanel/VBox" unique_id=1330528247]
+custom_minimum_size = Vector2(200, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
+theme_override_fonts/font = ExtResource("4_font_bold")
+theme_override_styles/normal = SubResource("StyleBox_Btn_Icon_Normal")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Icon_Hover")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Icon_Hover")
+text = "Browse Files..."
+
+[node name="InspectorOverlay" type="Control" parent="." unique_id=792430424]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Dimmer" type="ColorRect" parent="InspectorOverlay" unique_id=1290325572]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4)
+
+[node name="InspectorPanel" type="PanelContainer" parent="." unique_id=442363750]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8080.0
+offset_right = 9741.002
+offset_bottom = -0.0009765625
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_Inspector_Bg")
+
+[node name="DrawerContent" type="VBoxContainer" parent="InspectorPanel" unique_id=972781074]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="InspectorPanel/DrawerContent" unique_id=814724456]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Inspector_Header")
+
+[node name="HBox" type="HBoxContainer" parent="InspectorPanel/DrawerContent/Header" unique_id=1098432187]
+layout_mode = 2
+alignment = 2
+
+[node name="InspectorTitleLabel" type="Label" parent="InspectorPanel/DrawerContent/Header/HBox" unique_id=1270280180]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Inspector Panel"
+label_settings = SubResource("LabelSettings_Brand")
+
+[node name="CloseInspectorBtn" type="Button" parent="InspectorPanel/DrawerContent/Header/HBox" unique_id=1058336279]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "X"
+flat = true
+
+[node name="LogsView" type="VBoxContainer" parent="InspectorPanel/DrawerContent" unique_id=657251342]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LogContentPanel" type="PanelContainer" parent="InspectorPanel/DrawerContent/LogsView" unique_id=1505647003]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBox_Log_Panel")
+
+[node name="Scroll" type="ScrollContainer" parent="InspectorPanel/DrawerContent/LogsView/LogContentPanel" unique_id=1964302875]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="InspectorPanel/DrawerContent/LogsView/LogContentPanel/Scroll" unique_id=353245215]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+
+[node name="LogRichText" type="RichTextLabel" parent="InspectorPanel/DrawerContent/LogsView/LogContentPanel/Scroll/Margin" unique_id=1020197718]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+bbcode_enabled = true
+text = "[color=green]System ready...[/color]"
+scroll_following = true
+context_menu_enabled = true
+selection_enabled = true
+
+[node name="SettingsView" type="MarginContainer" parent="InspectorPanel/DrawerContent" unique_id=724953880]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBox" type="VBoxContainer" parent="InspectorPanel/DrawerContent/SettingsView" unique_id=1106877022]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="DarkModeSwitch" type="CheckButton" parent="InspectorPanel/DrawerContent/SettingsView/VBox" unique_id=97742945]
+visible = false
+layout_mode = 2
+button_pressed = true
+text = "Dark Mode"
+
+[node name="LanguageLabel" type="Label" parent="InspectorPanel/DrawerContent/SettingsView/VBox" unique_id=1222010989]
+visible = false
+layout_mode = 2
+text = "Language / Idioma"
+label_settings = SubResource("LabelSettings_Counter")
+
+[node name="LanguageDropdown" type="OptionButton" parent="InspectorPanel/DrawerContent/SettingsView/VBox" unique_id=630796803]
+visible = false
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "Español"
+popup/item_1/id = 1
+popup/item_2/text = "Português"
+popup/item_2/id = 2
+
+[node name="AboutView" type="MarginContainer" parent="InspectorPanel/DrawerContent" unique_id=1274280372]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InspectorPanel/DrawerContent/AboutView" unique_id=2113547557]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="InspectorPanel/DrawerContent/AboutView/ScrollContainer" unique_id=1007637337]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 34
+
+[node name="Label" type="Label" parent="InspectorPanel/DrawerContent/AboutView/ScrollContainer/VBox" unique_id=660262385]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_ndbmv")
+theme_override_font_sizes/font_size = 61
+text = "DB Forge 2026"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Label2" type="RichTextLabel" parent="InspectorPanel/DrawerContent/AboutView/ScrollContainer/VBox" unique_id=930787036]
+layout_mode = 2
+focus_mode = 2
+text = "PROYECTO: BD FORGE (DATA HOPPER)
+================================================================================
+VERSIÓN DEL SOFTWARE: vG 1.1.0.2
+ESTADO DEL CICLO DE VIDA: Tech Demo / Alpha de Producción
+ARQUITECTURA: x64 / .NET 6.0
+MOTOR BASE: Godot Engine 4.x (.NET Module)
+AUTORÍA: (C) 2026 YirehStudios
+LICENCIA: GNU General Public License v3 (Ver archivo LICENSE)
+
+1. VISIÓN GENERAL DEL SISTEMA
+--------------------------------------------------------------------------------
+BD Forge no es un simple conversor de formatos; es una herramienta de Ingeniería 
+de Datos diseñada bajo el concepto de \"Tolva de Datos\" (Data Hopper). Su 
+objetivo es ingerir información cruda, desordenada y humanamente formateada 
+desde diversas fuentes para normalizarla en estructuras estrictas.
+
+El sistema actúa como una capa de middleware (ETL: Extract, Transform, Load) 
+que garantiza la integridad referencial antes de que los datos toquen una base 
+de datos de producción.
+
+En su versión actual (vG 1.1.0.2), el sistema se especializa en la exportación 
+hacia el estándar DBF (Visual FoxPro 9 Compatible), aunque su arquitectura 
+interna está desacoplada para soportar futuros drivers de salida (SQL, JSON, 
+XML) sin refactorización del núcleo.
+
+2. CAPACIDADES TÉCNICAS (FEATURE SET)
+--------------------------------------------------------------------------------
+El sistema implementa soluciones a problemas comunes en la importación de datos:
+
+A. MOTOR HÍBRIDO DE LECTURA
+   - DOM (Document Object Model): Para archivos Excel (.xlsx), carga la 
+     estructura completa en memoria para resolver lógica compleja como celdas 
+     combinadas.
+   - Streaming (Flujo): Para archivos OpenDocument (.ods), utiliza punteros 
+     de lectura XML secuencial, permitiendo procesar archivos masivos con 
+     una huella de memoria (RAM) mínima.
+
+B. ALGORITMOS DE NORMALIZACIÓN
+   - \"Unmerge\" Lógico: Transforma reportes visuales agrupados (celdas 
+     combinadas en Excel) en tablas planas relacionales.
+   - Inferencia de Tipos (Voting System): Analiza estadísticamente la densidad 
+     de datos de una columna para sugerir tipos (Date, Numeric, Boolean) y 
+     detectar \"Columnas Fantasma\" (basura).
+   - Extensión de Esquema: Capacidad de agregar columnas estructurales vacías (Placeholders) al archivo de salida para cumplir
+     con requisitos estrictos de formato de bases de datos destino.
+
+C. GESTIÓN DE E/S (I/O) AVANZADA
+   - Hot-Read: Implementación de `FileShare.ReadWrite` que permite leer 
+     archivos aunque estén bloqueados por Excel o LibreOffice.
+   - Escritura Segura: Algoritmo de resolución de conflictos de nombres 
+     para evitar sobrescritura accidental o bloqueos de escritura.
+
+D. ROBUSTEZ NUMÉRICA (FAIL-SAFE)
+   - Integer Truncation Protection: El motor de escritura previene cierres inesperados (crashes)
+     cuando un número excede el largo definido.        
+   - Implementa una estrategia de truncado seguro o llenado de asteriscos (***) compatible con lectores legacy
+     garantizando que el resto del archivo se escriba correctamente.
+
+3. REQUISITOS DEL ENTORNO DE EJECUCIÓN
+--------------------------------------------------------------------------------
+Para el despliegue del binario o la compilación desde el código fuente:
+
+- Sistema Operativo: 
+  - Windows 10 / 11 (Recomendado Build 19044 o superior).
+  - Arquitectura obligatoria x64.
+
+- Dependencias de Framework:
+  - .NET 6.0 Runtime (o superior).
+  - Librerías de Visual C++ Redistributable (para dependencias nativas).
+
+- Hardware Recomendado:
+  - CPU: Procesador Multi-core (2+ núcleos) para el Garbage Collector concurrente.
+  - RAM: 
+    - 200 MB para operación base.
+    - 2 GB+ recomendados para datasets de Excel > 500,000 filas (debido a NPOI).
+    - El modo ODS es eficiente en memoria y opera con <500 MB incluso en carga alta.
+
+4. ESTRUCTURA DE COMPILACIÓN (BUILD)
+--------------------------------------------------------------------------------
+El proyecto utiliza Godot Engine como host de la aplicación .NET.
+
+- Dependencias NuGet Principales:
+  1. NPOI (2.x): Motor de manipulación de formatos Office Open XML.
+  2. NPOI.OOXML: Extensiones para formatos .xlsx.
+  3. System.Text.Encoding.CodePages: Soporte para codificación Windows-1252 
+     (ANSI Legacy) requerida para la compatibilidad con DBF.
+  4. System.IO.Compression: Gestión de descompresión para archivos ODS.
+
+- Configuración de Exportación (Godot):
+  - Modo: Release.
+  - Arquitectura: x86_64.
+  - Embed PCK: Activado (Ejecutable monolítico).
+
+5. LIMITACIONES CONOCIDAS (vG 1.1.0.2)
+--------------------------------------------------------------------------------
+- Nombres de Campos: Aunque la arquitectura interna soporta identificadores 
+  de hasta 128 caracteres (spec VFP9), el driver de escritura actual limita 
+  los nombres a 10 caracteres para mantener compatibilidad retroactiva estricta 
+  con sistemas legacy (dBase III).
+- CSV: No soporta agrupación lógica. Los archivos CSV se tratan como \"Raw Data\".
+- Fórmulas: BD Forge extrae el \"Valor Calculado\" en caché de las celdas de Excel. 
+  No re-calcula fórmulas en tiempo de ejecución.
+
+6. ROADMAP Y FUTURO
+--------------------------------------------------------------------------------
+El desarrollo actual se centra en la estabilidad del núcleo de ingestión.
+Funciones planificadas para versiones vG 1.2.x:
+- Soporte nativo para salida SQL (Script Generation).
+- Habilitación del driver VFP9 completo (Nombres de 128 caracteres).
+- Serialización a JSON para integración web.
+- Interfaz de línea de comandos (CLI) para automatización de servidores.
+
+--------------------------------------------------------------------------------
+DOCUMENTACIÓN TÉCNICA DETALLADA DISPONIBLE EN 'DOCUMENTATION.md'
+Mantener este archivo actualizado con cada refactorización del Kernel."
+fit_content = true
+scroll_following = true
+context_menu_enabled = true
+horizontal_alignment = 1
+selection_enabled = true
+
+[node name="Label3" type="Label" parent="InspectorPanel/DrawerContent/AboutView/ScrollContainer/VBox" unique_id=10652572]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_1btkb")
+theme_override_font_sizes/font_size = 38
+text = "Un programa desarrollado por Yireh Studios™"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="InspectorPanel/DrawerContent/AboutView/ScrollContainer/VBox" unique_id=467346976]
+layout_mode = 2
+texture = ExtResource("14_ndbmv")
+expand_mode = 5
+stretch_mode = 3
+
+[node name="LoadingToast" type="PanelContainer" parent="." unique_id=658159341]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -100.0
+offset_right = 250.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBox_Toast")
+
+[node name="Margin" type="MarginContainer" parent="LoadingToast" unique_id=1699360062]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 12
+
+[node name="HBox" type="HBoxContainer" parent="LoadingToast/Margin" unique_id=2046692368]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="VBox" type="VBoxContainer" parent="LoadingToast/Margin/HBox" unique_id=441137119]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ProcessingLabel" type="Label" parent="LoadingToast/Margin/HBox/VBox" unique_id=193707187]
+layout_mode = 2
+text = "Processing..."
+label_settings = SubResource("LabelSettings_Brand")
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="." unique_id=1130890441]
+libraries/ = SubResource("Lib_Menu")
+
+[node name="LogoYireh256_png" type="Sprite2D" parent="." unique_id=1976820014]
+position = Vector2(56, 1027)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("14_ndbmv")

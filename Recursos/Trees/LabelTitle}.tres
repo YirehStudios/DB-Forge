@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bt8kxnsolwmnb"]
+
+[ext_resource type="FontFile" path="res://Recursos/Inter/static/Inter_18pt-Bold.ttf" id="1_font_title"]
+
+[resource]
+font = ExtResource("1_font_title")
+font_size = 18
+font_color = Color(0.95, 0.95, 0.95, 1)

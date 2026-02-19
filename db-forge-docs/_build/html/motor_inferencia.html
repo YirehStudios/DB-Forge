@@ -1,0 +1,174 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motor de Inferencia Estadística (Stride Sampling) &mdash; BD Forge (Data Hopper) vE 2.0.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e51e059b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sistema de Logs Forense y Auditoría" href="sistema_logs_forense.html" />
+    <link rel="prev" title="Arquitectura del Sistema y Núcleo de Procesamiento" href="arquitectura_tecnica.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BD Forge (Data Hopper)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">📘 Manual del Operador</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_usuario.html">Manual del Operador</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolucion_problemas.html">Guía de Resolución de Problemas (Troubleshooting)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">⚙️ Arquitectura e Ingeniería</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="arquitectura_tecnica.html">Arquitectura del Sistema y Núcleo de Procesamiento</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Motor de Inferencia Estadística (Stride Sampling)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#algoritmo-de-muestreo-estriado">Algoritmo de Muestreo Estriado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sistema-de-votacion">Sistema de Votación</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#jerarquia-de-evaluacion">Jerarquía de Evaluación</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#deteccion-de-columnas-fantasma">Detección de Columnas Fantasma</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sistema_logs_forense.html">Sistema de Logs Forense y Auditoría</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">💻 Desarrollo (DevOps)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="referencia_api.html">Referencia de API del Núcleo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BD Forge (Data Hopper)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Motor de Inferencia Estadística (Stride Sampling)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/motor_inferencia.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="motor-de-inferencia-estadistica-stride-sampling">
+<h1>Motor de Inferencia Estadística (Stride Sampling)<a class="headerlink" href="#motor-de-inferencia-estadistica-stride-sampling" title="Link to this heading"></a></h1>
+<p>BD Forge no confía en los metadatos de Excel, ya que los usuarios suelen formatear celdas numéricas como texto. En su lugar, utiliza un algoritmo de inferencia basado en contenido.</p>
+<section id="algoritmo-de-muestreo-estriado">
+<h2>Algoritmo de Muestreo Estriado<a class="headerlink" href="#algoritmo-de-muestreo-estriado" title="Link to this heading"></a></h2>
+<p>En lugar de leer las primeras N filas (que podrían ser encabezados vacíos), el sistema implementa un muestreo distribuido uniformemente.</p>
+<ul class="simple">
+<li><p><strong>Población:</strong> Total de filas del documento.</p></li>
+<li><p><strong>Tamaño de Muestra:</strong> 200 registros.</p></li>
+<li><p><strong>Stride (Paso):</strong> <code class="docutils literal notranslate"><span class="pre">Math.Max(1,</span> <span class="pre">TotalRows</span> <span class="pre">/</span> <span class="pre">200)</span></code>.</p></li>
+</ul>
+<p>El sistema itera la tabla completa saltando cada <code class="docutils literal notranslate"><span class="pre">Stride</span></code> filas. Esto asegura que la muestra sea representativa tanto del inicio, medio y final del archivo.</p>
+</section>
+<section id="sistema-de-votacion">
+<h2>Sistema de Votación<a class="headerlink" href="#sistema-de-votacion" title="Link to this heading"></a></h2>
+<p>Para cada columna, se ejecuta un análisis de patrones mediante Expresiones Regulares (<cite>Regex</cite>) y parsing de prueba.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Pseudocódigo del sistema de votación</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">celda</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">muestra</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">EsTiempo</span><span class="p">(</span><span class="n">celda</span><span class="p">))</span><span class="w"> </span><span class="n">vTime</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">EsFecha</span><span class="p">(</span><span class="n">celda</span><span class="p">))</span><span class="w"> </span><span class="n">vDate</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">EsNumero</span><span class="p">(</span><span class="n">celda</span><span class="p">))</span><span class="w"> </span><span class="n">vNum</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">EsBooleano</span><span class="p">(</span><span class="n">celda</span><span class="p">))</span><span class="w"> </span><span class="n">vBool</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Umbral de Decisión:</strong>
+El tipo ganador debe superar el <strong>50% de validez</strong> (<cite>validCount * 0.5</cite>).</p>
+<section id="jerarquia-de-evaluacion">
+<h3>Jerarquía de Evaluación<a class="headerlink" href="#jerarquia-de-evaluacion" title="Link to this heading"></a></h3>
+<p>El orden de comprobación es estricto para evitar falsos positivos:</p>
+<ol class="arabic simple">
+<li><p><strong>Time (5):</strong> Regex estricto <code class="docutils literal notranslate"><span class="pre">^-?\d+:\d{2}</span></code>. Prioritario porque “12:00” puede parecer numérico o texto.</p></li>
+<li><p><strong>Date (3):</strong> Debe contener separadores (<cite>/</cite> o <cite>-</cite>) y ser parseable por <cite>DateTime</cite>.</p></li>
+<li><p><strong>Numeric (1/2):</strong> <cite>double.TryParse</cite>. Detecta si tiene punto decimal para diferenciar <cite>Integer</cite> de <cite>Numeric</cite>.</p></li>
+<li><p><strong>Logical (4):</strong> Conjunto cerrado {T, F, Y, N, 1, 0, YES, NO}.</p></li>
+<li><p><strong>Character (0):</strong> Fallback por defecto (Default).</p></li>
+</ol>
+</section>
+</section>
+<section id="deteccion-de-columnas-fantasma">
+<h2>Detección de Columnas Fantasma<a class="headerlink" href="#deteccion-de-columnas-fantasma" title="Link to this heading"></a></h2>
+<p>Si una columna tiene encabezado (ej. “FIELD_15”) pero el conteo de datos válidos en la muestra es <strong>cero</strong> (solo nulos o espacios en blanco), se marca como <code class="docutils literal notranslate"><span class="pre">IsGhostColumn</span> <span class="pre">=</span> <span class="pre">true</span></code>.</p>
+<ul class="simple">
+<li><p><strong>Efecto:</strong> La columna se oculta automáticamente en la interfaz (<cite>SheetCard</cite>) y se excluye de la exportación por defecto, limpiando la estructura final.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="arquitectura_tecnica.html" class="btn btn-neutral float-left" title="Arquitectura del Sistema y Núcleo de Procesamiento" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sistema_logs_forense.html" class="btn btn-neutral float-right" title="Sistema de Logs Forense y Auditoría" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, YirehStudios.
+      <span class="lastupdated">Last updated on True.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

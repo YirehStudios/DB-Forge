@@ -1,0 +1,171 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filosofía y Arquitectura del Sistema &mdash; BD Forge (Data Hopper) vE 2.0.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e51e059b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BD Forge (Data Hopper)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">📘 Manual del Operador</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_usuario.html">Manual del Operador</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolucion_problemas.html">Guía de Resolución de Problemas (Troubleshooting)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">⚙️ Arquitectura e Ingeniería</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arquitectura_tecnica.html">Arquitectura del Sistema y Núcleo de Procesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motor_inferencia.html">Motor de Inferencia Estadística (Stride Sampling)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sistema_logs_forense.html">Sistema de Logs Forense y Auditoría</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">💻 Desarrollo (DevOps)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="referencia_api.html">Referencia de API del Núcleo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BD Forge (Data Hopper)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Filosofía y Arquitectura del Sistema</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/filosofia_arquitectura.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="filosofia-y-arquitectura-del-sistema">
+<h1>Filosofía y Arquitectura del Sistema<a class="headerlink" href="#filosofia-y-arquitectura-del-sistema" title="Link to this heading"></a></h1>
+<p>BD Forge nace de una necesidad crítica en la gestión de bases de datos: <strong>la limpieza de la fuente</strong>. Los usuarios finales suelen tratar a Excel como un lienzo de pintura en lugar de una base de datos, combinando celdas, usando colores como datos y mezclando textos con números.</p>
+<section id="el-paradigma-data-hopper">
+<h2>El Paradigma “Data Hopper”<a class="headerlink" href="#el-paradigma-data-hopper" title="Link to this heading"></a></h2>
+<p>El concepto de “Tolva” implica un embudo de entrada amplio pero una salida estrecha y controlada.</p>
+<ul class="simple">
+<li><p><strong>Entrada (Ingesta):</strong> Acepta imperfecciones. Archivos con celdas combinadas, columnas sin nombre, formatos de fecha mixtos (DD/MM vs MM/DD) y basura visual.</p></li>
+<li><dl class="simple">
+<dt><strong>El Proceso (La Forja):</strong></dt><dd><ol class="arabic simple">
+<li><p><strong>Aplanamiento:</strong> Desagrupa lógicamente las jerarquías visuales.</p></li>
+<li><p><strong>Inferencia:</strong> Adivina la intención del dato mediante muestreo estadístico, no solo leyendo la cabecera.</p></li>
+<li><p><strong>Saneamiento:</strong> Aplica reglas de mutación para forzar tipos estrictos.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p><strong>Salida (Egreso):</strong> Produce archivos DBF/SQL relacionalmente puros. Si un dato no cabe, se trunca o se rechaza, pero <strong>nunca</strong> se rompe la estructura de la tabla.</p></li>
+</ul>
+</section>
+<section id="arquitectura-de-alto-nivel-c4-model-nivel-2">
+<h2>Arquitectura de Alto Nivel (C4 Model - Nivel 2)<a class="headerlink" href="#arquitectura-de-alto-nivel-c4-model-nivel-2" title="Link to this heading"></a></h2>
+<p>El sistema opera como una aplicación monolítica de escritorio construida sobre <strong>Godot Engine 4.x</strong> con un módulo .NET 6.0 integrado.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[ USUARIO ]
+     | (Drag &amp; Drop)
+     v
+[ CAPA DE PRESENTACIÓN (GODOT UI) ]
+|  - MainMenu.cs (Orquestador)
+|  - SheetCard.cs (Estado Visual)
+|  - VisualCardHelper (Animaciones)
+|
++---&gt; [ CAPA DE NEGOCIO (.NET CORE) ]
+         |
+         +-- [ MOTOR DE LECTURA (Readers) ]
+         |      |-- ExcelReaderNPOI (DOM / Memoria Alta)
+         |      |-- OdsReader (Streaming / Memoria Baja)
+         |      +-- CsvReader (Texto Plano)
+         |
+         +-- [ MOTOR DE INFERENCIA ]
+         |      +-- Algoritmo de Muestreo Estriado (Stride Sampling)
+         |
+         +-- [ MOTOR DE EXPORTACIÓN (The Hopper) ]
+                |-- FastDBF Driver (Salida xBase)
+                |-- NPOI Writer (Salida Excel)
+                +-- CSV Writer (Salida RFC 4180)
+</pre></div>
+</div>
+</section>
+<section id="principios-de-diseno">
+<h2>Principios de Diseño<a class="headerlink" href="#principios-de-diseno" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Integridad sobre Comodidad:</strong> El sistema prefiere abortar un proceso o llenar un campo con <code class="docutils literal notranslate"><span class="pre">****</span></code> (error de desbordamiento) antes que permitir que un número <code class="docutils literal notranslate"><span class="pre">12345</span></code> se guarde como <code class="docutils literal notranslate"><span class="pre">1234</span></code> por falta de espacio silenciosa.</p></li>
+<li><p><strong>Memoria Híbrida:</strong> Reconoce que no todos los archivos son iguales. Usa carga completa (DOM) para archivos pequeños/complejos (Excel) y flujo continuo (Streaming) para archivos masivos (ODS).</p></li>
+<li><p><strong>Auditoría Forense:</strong> Cada mutación de dato (ej. cambiar “12.5” a 12 en un campo entero) debe dejar un rastro auditable.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, YirehStudios.
+      <span class="lastupdated">Last updated on True.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

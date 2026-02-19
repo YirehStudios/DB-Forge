@@ -1,0 +1,174 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contribution &amp; Development Guide &mdash; BD Forge (Data Hopper) vE 2.0.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e51e059b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BD Forge (Data Hopper)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">📘 Manual del Operador</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_usuario.html">Manual del Operador</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolucion_problemas.html">Guía de Resolución de Problemas (Troubleshooting)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">⚙️ Arquitectura e Ingeniería</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arquitectura_tecnica.html">Arquitectura del Sistema y Núcleo de Procesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motor_inferencia.html">Motor de Inferencia Estadística (Stride Sampling)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sistema_logs_forense.html">Sistema de Logs Forense y Auditoría</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">💻 Desarrollo (DevOps)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="referencia_api.html">Referencia de API del Núcleo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BD Forge (Data Hopper)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Contribution &amp; Development Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/development_guide.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contribution-development-guide">
+<h1>Contribution &amp; Development Guide<a class="headerlink" href="#contribution-development-guide" title="Link to this heading"></a></h1>
+<p>Instructions for setting up the development environment for BD Forge vE 2.0.0.0.</p>
+<section id="system-requirements">
+<h2>System Requirements<a class="headerlink" href="#system-requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Godot Engine 4.x (.NET Edition):</strong> It is critical to download the version with C# support (Mono/.NET). The standard GDScript version <strong>will not</strong> compile this project.</p></li>
+<li><p><strong>.NET SDK 6.0+:</strong> Required to build the solution and restore NuGet packages.</p></li>
+<li><p><strong>Recommended IDE:</strong> Visual Studio 2022, JetBrains Rider, or VS Code (with C# Dev Kit).</p></li>
+</ul>
+</section>
+<section id="project-structure">
+<h2>Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading"></a></h2>
+<p>The project follows a hybrid Godot/C# architecture:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/Escenas</span></code>: <code class="docutils literal notranslate"><span class="pre">.tscn</span></code> files (UI Layouts and Prefabs).</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">/Script</span></code>: C# Source Code.</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">/Core/Readers</span></code>: Pure I/O logic (NPOI/ODS Readers). Decoupled from Godot APIs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/UI</span></code>: Interface Controllers (MainMenu, SheetCard).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/UI/Components</span></code>: Reusable visual widgets.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/docs</span></code>: Sphinx documentation source (this site).</p></li>
+</ul>
+</section>
+<section id="building-documentation">
+<h2>Building Documentation<a class="headerlink" href="#building-documentation" title="Link to this heading"></a></h2>
+<p>This documentation is generated using <strong>Sphinx</strong> and the <strong>Read the Docs</strong> theme.</p>
+<ol class="arabic">
+<li><p>Install dependencies (Python required):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sphinx<span class="w"> </span>sphinx-rtd-theme<span class="w"> </span>sphinx-intl
+</pre></div>
+</div>
+</li>
+<li><p>Build HTML (English Source):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>docs
+.<span class="se">\m</span>ake.bat<span class="w"> </span>html
+</pre></div>
+</div>
+</li>
+<li><p>The output will be located at <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code>.</p></li>
+</ol>
+</section>
+<section id="internationalization-i18n">
+<h2>Internationalization (i18n)<a class="headerlink" href="#internationalization-i18n" title="Link to this heading"></a></h2>
+<p>To generate translations (e.g., Spanish/Portuguese):</p>
+<ol class="arabic simple">
+<li><p>Extract translatable messages:
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gettext</span></code></p></li>
+<li><p>Update message catalogs:
+<code class="docutils literal notranslate"><span class="pre">sphinx-intl</span> <span class="pre">update</span> <span class="pre">-p</span> <span class="pre">_build/gettext</span> <span class="pre">-l</span> <span class="pre">es</span> <span class="pre">-l</span> <span class="pre">pt</span></code></p></li>
+<li><p>Edit the generated <code class="docutils literal notranslate"><span class="pre">.po</span></code> files in <code class="docutils literal notranslate"><span class="pre">docs/locale/</span></code>.</p></li>
+<li><p>Build specific language:
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-e</span> <span class="pre">SPHINXOPTS=&quot;-D</span> <span class="pre">language='es'&quot;</span> <span class="pre">html</span></code></p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, YirehStudios.
+      <span class="lastupdated">Last updated on True.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

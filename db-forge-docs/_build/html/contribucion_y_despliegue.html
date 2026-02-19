@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contribución y Despliegue &mdash; BD Forge (Data Hopper) vE 2.0.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e51e059b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BD Forge (Data Hopper)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">📘 Manual del Operador</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_usuario.html">Manual del Operador</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolucion_problemas.html">Guía de Resolución de Problemas (Troubleshooting)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">⚙️ Arquitectura e Ingeniería</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arquitectura_tecnica.html">Arquitectura del Sistema y Núcleo de Procesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motor_inferencia.html">Motor de Inferencia Estadística (Stride Sampling)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sistema_logs_forense.html">Sistema de Logs Forense y Auditoría</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">💻 Desarrollo (DevOps)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="referencia_api.html">Referencia de API del Núcleo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BD Forge (Data Hopper)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Contribución y Despliegue</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/contribucion_y_despliegue.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contribucion-y-despliegue">
+<h1>Contribución y Despliegue<a class="headerlink" href="#contribucion-y-despliegue" title="Link to this heading"></a></h1>
+<p>Guía para desarrolladores que deseen compilar el proyecto o generar esta documentación localmente.</p>
+<section id="entorno-de-desarrollo-godot">
+<h2>Entorno de Desarrollo (Godot)<a class="headerlink" href="#entorno-de-desarrollo-godot" title="Link to this heading"></a></h2>
+<section id="requisitos">
+<h3>Requisitos<a class="headerlink" href="#requisitos" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Godot Engine 4.x (.NET Version):</strong> Asegúrese de descargar la versión con soporte C#.</p></li>
+<li><p><strong>.NET SDK 6.0+:</strong> Necesario para compilar la solución <code class="docutils literal notranslate"><span class="pre">.sln</span></code>.</p></li>
+</ul>
+</section>
+<section id="ejecucion-local">
+<h3>Ejecución Local<a class="headerlink" href="#ejecucion-local" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Clone el repositorio.</p></li>
+<li><p>Abra el archivo <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> con el editor de Godot.</p></li>
+<li><p>Godot intentará compilar la solución C# automáticamente. Si falla, abra una terminal en la raíz y ejecute:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dotnet<span class="w"> </span>build
+</pre></div>
+</div>
+</li>
+<li><p>Presione <strong>F5</strong> en el editor de Godot para iniciar la depuración.</p></li>
+</ol>
+</section>
+</section>
+<section id="generacion-de-documentacion-sphinx">
+<h2>Generación de Documentación (Sphinx)<a class="headerlink" href="#generacion-de-documentacion-sphinx" title="Link to this heading"></a></h2>
+<p>Esta documentación utiliza <strong>Sphinx</strong> con el tema <strong>Read the Docs</strong>.</p>
+<section id="requisitos-previos">
+<h3>Requisitos Previos<a class="headerlink" href="#requisitos-previos" title="Link to this heading"></a></h3>
+<p>Necesita Python instalado. Instale las dependencias:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sphinx<span class="w"> </span>sphinx-rtd-theme
+</pre></div>
+</div>
+</section>
+<section id="compilacion-de-html">
+<h3>Compilación de HTML<a class="headerlink" href="#compilacion-de-html" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Navegue a la carpeta <code class="docutils literal notranslate"><span class="pre">docs/</span></code>.</p></li>
+<li><p>Ejecute el script de construcción:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># En Windows (PowerShell/CMD)</span>
+./make.bat<span class="w"> </span>html
+
+<span class="c1"># En Linux/Mac</span>
+make<span class="w"> </span>html
+</pre></div>
+</div>
+</li>
+<li><p>Abra el archivo <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code> en su navegador web.</p></li>
+</ol>
+</section>
+</section>
+<section id="estructura-de-directorios">
+<h2>Estructura de Directorios<a class="headerlink" href="#estructura-de-directorios" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Escenas/</span></code>: Archivos <code class="docutils literal notranslate"><span class="pre">.tscn</span></code> (UI y Escenas de Godot).</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Script/</span></code>: Código fuente C# (Lógica de negocio).</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Core/Readers/</span></code>: Lógica de bajo nivel (NPOI, ODS).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UI/Components/</span></code>: Lógica de presentación (SheetCard).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code>: Archivos fuente de documentación (.rst).</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, YirehStudios.
+      <span class="lastupdated">Last updated on True.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

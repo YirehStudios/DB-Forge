@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arquitectura del Sistema y Núcleo de Procesamiento &mdash; BD Forge (Data Hopper) vE 2.0.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e51e059b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Motor de Inferencia Estadística (Stride Sampling)" href="motor_inferencia.html" />
+    <link rel="prev" title="Guía de Resolución de Problemas (Troubleshooting)" href="resolucion_problemas.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BD Forge (Data Hopper)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">📘 Manual del Operador</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_usuario.html">Manual del Operador</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolucion_problemas.html">Guía de Resolución de Problemas (Troubleshooting)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">⚙️ Arquitectura e Ingeniería</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Arquitectura del Sistema y Núcleo de Procesamiento</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#estrategias-de-ingesta-the-readers">1. Estrategias de Ingesta (The Readers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-lector-excel-dom-excelreadernpoi-cs">A. Lector Excel DOM (<code class="docutils literal notranslate"><span class="pre">ExcelReaderNPOI.cs</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#b-lector-opendocument-streaming-odsreader-cs">B. Lector OpenDocument Streaming (<code class="docutils literal notranslate"><span class="pre">OdsReader.cs</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#el-motor-de-exportacion-the-hopper">2. El Motor de Exportación (“The Hopper”)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modelo-de-datos-y-dtos">3. Modelo de Datos y DTOs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="motor_inferencia.html">Motor de Inferencia Estadística (Stride Sampling)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sistema_logs_forense.html">Sistema de Logs Forense y Auditoría</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">💻 Desarrollo (DevOps)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="referencia_api.html">Referencia de API del Núcleo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BD Forge (Data Hopper)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Arquitectura del Sistema y Núcleo de Procesamiento</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/arquitectura_tecnica.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="arquitectura-del-sistema-y-nucleo-de-procesamiento">
+<h1>Arquitectura del Sistema y Núcleo de Procesamiento<a class="headerlink" href="#arquitectura-del-sistema-y-nucleo-de-procesamiento" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Esta sección asume conocimiento técnico de C# y estructuras de datos.</p>
+</div>
+<p>El núcleo de BD Forge opera sobre una arquitectura modular desacoplada, donde la interfaz de usuario (<cite>MainMenu.cs</cite>) actúa como un orquestador que inyecta dependencias de lectura (<cite>IReader</cite> implícito) dependiendo de la extensión del archivo.</p>
+<section id="estrategias-de-ingesta-the-readers">
+<h2>1. Estrategias de Ingesta (The Readers)<a class="headerlink" href="#estrategias-de-ingesta-the-readers" title="Link to this heading"></a></h2>
+<p>El sistema implementa dos estrategias de lectura diametralmente opuestas para optimizar el balance entre funcionalidad y rendimiento.</p>
+<section id="a-lector-excel-dom-excelreadernpoi-cs">
+<h3>A. Lector Excel DOM (<code class="docutils literal notranslate"><span class="pre">ExcelReaderNPOI.cs</span></code>)<a class="headerlink" href="#a-lector-excel-dom-excelreadernpoi-cs" title="Link to this heading"></a></h3>
+<p>Para archivos de Microsoft Excel (<cite>.xlsx</cite>, <cite>.xls</cite>), se utiliza <strong>NPOI</strong> para cargar el Modelo de Objetos del Documento (DOM) completo en la memoria gestionada (Heap).</p>
+<ul>
+<li><p><strong>Algoritmo de Desagrupación Lógica (Unmerge):</strong>
+Excel almacena las celdas combinadas como regiones de coordenadas, donde solo la celda superior izquierda contiene el valor.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Mapa de Complejidad O(1) para búsquedas rápidas durante la lectura</span>
+<span class="k">private</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">ICell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_mergedCellsMap</span><span class="p">;</span>
+
+<span class="c1">// Durante la inicialización, pre-calculamos todas las redirecciones:</span>
+<span class="n">_mergedCellsMap</span><span class="p">[</span><span class="s">$&quot;{r}_{c}&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parentCell</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Al leer una celda vacía, el lector consulta este mapa. Si la coordenada existe, redirige el puntero a la celda “padre”, garantizando integridad referencial absoluta.</p>
+</li>
+<li><p><strong>Recuperación de Tiempos Negativos:</strong>
+Excel visualiza tiempos negativos como <code class="docutils literal notranslate"><span class="pre">#####</span></code>. BD Forge accede al valor flotante subyacente (ej. <code class="docutils literal notranslate"><span class="pre">-0.0416</span></code>) y lo reconstruye matemáticamente a <code class="docutils literal notranslate"><span class="pre">-01:00:00</span></code> usando <code class="docutils literal notranslate"><span class="pre">TimeSpan.FromDays()</span></code>.</p></li>
+</ul>
+</section>
+<section id="b-lector-opendocument-streaming-odsreader-cs">
+<h3>B. Lector OpenDocument Streaming (<code class="docutils literal notranslate"><span class="pre">OdsReader.cs</span></code>)<a class="headerlink" href="#b-lector-opendocument-streaming-odsreader-cs" title="Link to this heading"></a></h3>
+<p>Para archivos <cite>.ods</cite>, la carga del DOM es inviable debido a la ineficiencia del XML de OpenOffice. Se implementa un lector de flujo unidireccional (<em>Forward-Only</em>).</p>
+<ul class="simple">
+<li><p><strong>Arquitectura de Streaming:</strong>
+Utiliza <code class="docutils literal notranslate"><span class="pre">XmlReader</span></code> sobre el archivo <code class="docutils literal notranslate"><span class="pre">content.xml</span></code> extraído al vuelo del contenedor ZIP. Esto mantiene la huella de memoria (RAM Footprint) extremadamente baja, independientemente del tamaño del archivo.</p></li>
+<li><p><strong>Manejo de Spans y Repeticiones:</strong>
+ODS comprime filas repetidas con atributos como <code class="docutils literal notranslate"><span class="pre">number-columns-repeated=&quot;1024&quot;</span></code>.</p>
+<ul>
+<li><p><strong>Problema:</strong> Un lector XML ingenuo leería solo 1 nodo, desalineando la tabla.</p></li>
+<li><p><strong>Solución (The Span Buffer):</strong>
+El lector mantiene un <code class="docutils literal notranslate"><span class="pre">Dictionary&lt;int,</span> <span class="pre">(object</span> <span class="pre">Value,</span> <span class="pre">int</span> <span class="pre">RemainingRows)&gt;</span> <span class="pre">_spanBuffer</span></code>.
+Si una celda tiene un <code class="docutils literal notranslate"><span class="pre">row-span</span></code>, su valor se almacena en el buffer. En las siguientes iteraciones de <code class="docutils literal notranslate"><span class="pre">ReadRow()</span></code>, el lector inyecta artificialmente estos valores buffered en la posición correcta antes de leer el XML real de esa fila.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="el-motor-de-exportacion-the-hopper">
+<h2>2. El Motor de Exportación (“The Hopper”)<a class="headerlink" href="#el-motor-de-exportacion-the-hopper" title="Link to this heading"></a></h2>
+<p>El proceso de exportación se encapsula en la clase <code class="docutils literal notranslate"><span class="pre">ForgeTicket</span></code> (DTO).</p>
+<ul class="simple">
+<li><p><strong>Saneamiento (SanitizeDataWithReport):</strong>
+Antes de escribir en disco, cada dato pasa por una función pura que normaliza el valor según el tipo de destino.</p>
+<ul>
+<li><p><em>Detección de Ambigüedad Numérica:</em> Resuelve el conflicto de separadores (punto vs coma) analizando la posición del último índice de cada caracter. Si <code class="docutils literal notranslate"><span class="pre">LastComma</span> <span class="pre">&gt;</span> <span class="pre">LastDot</span></code>, asume formato Europeo y normaliza.</p></li>
+</ul>
+</li>
+<li><p><strong>Truncamiento Seguro (Overflow Protection):</strong>
+En el driver <code class="docutils literal notranslate"><span class="pre">FastDBF</span></code>, se habilita explícitamente <code class="docutils literal notranslate"><span class="pre">AllowIntegerTruncate</span> <span class="pre">=</span> <span class="pre">true</span></code>.
+* <em>Justificación:</em> En procesos por lotes de 1 millón de registros, es preferible guardar un registro con asteriscos (<code class="docutils literal notranslate"><span class="pre">****</span></code>) que detener todo el proceso por una excepción de desbordamiento (<cite>System.OverflowException</cite>).</p></li>
+</ul>
+</section>
+<section id="modelo-de-datos-y-dtos">
+<h2>3. Modelo de Datos y DTOs<a class="headerlink" href="#modelo-de-datos-y-dtos" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Objetos de Transferencia de Datos</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Clase</p></th>
+<th class="head"><p>Responsabilidad</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SheetData</span></code></p></td>
+<td><p>Contiene la matriz de datos crudos (<cite>RawRows</cite>) y la muestra de depuración (<cite>DebugSample</cite>). Reside en memoria RAM.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DetectedColumn</span></code></p></td>
+<td><p>Metadatos inferidos: Nombre, Tipo Sugerido (int), Longitud y Decimales.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ForgeTicket</span></code></p></td>
+<td><p>El contrato final para el motor de exportación. Contiene los datos saneados y las rutas de destino calculadas.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="resolucion_problemas.html" class="btn btn-neutral float-left" title="Guía de Resolución de Problemas (Troubleshooting)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="motor_inferencia.html" class="btn btn-neutral float-right" title="Motor de Inferencia Estadística (Stride Sampling)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, YirehStudios.
+      <span class="lastupdated">Last updated on True.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

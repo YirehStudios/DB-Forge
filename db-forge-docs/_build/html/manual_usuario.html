@@ -1,0 +1,205 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual del Operador &mdash; BD Forge (Data Hopper) vE 2.0.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e51e059b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Guía de Resolución de Problemas (Troubleshooting)" href="resolucion_problemas.html" />
+    <link rel="prev" title="Documentación Oficial de BD Forge (Data Hopper)" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BD Forge (Data Hopper)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">📘 Manual del Operador</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Manual del Operador</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#la-interfaz-data-hopper">1. La Interfaz “Data Hopper”</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#zona-de-arrastre-drop-zone">Zona de Arrastre (Drop Zone)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#barra-de-herramientas-global">Barra de Herramientas Global</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fichas-de-control-sheet-cards">2. Fichas de Control (Sheet Cards)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#semaforo-de-estado-visual-helper">Semáforo de Estado (Visual Helper)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#editor-de-estructura-live-debugging">Editor de Estructura (Live Debugging)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tipos-de-datos-soportados">3. Tipos de Datos Soportados</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resolucion_problemas.html">Guía de Resolución de Problemas (Troubleshooting)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">⚙️ Arquitectura e Ingeniería</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arquitectura_tecnica.html">Arquitectura del Sistema y Núcleo de Procesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motor_inferencia.html">Motor de Inferencia Estadística (Stride Sampling)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sistema_logs_forense.html">Sistema de Logs Forense y Auditoría</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">💻 Desarrollo (DevOps)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="referencia_api.html">Referencia de API del Núcleo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BD Forge (Data Hopper)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Manual del Operador</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/manual_usuario.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="manual-del-operador">
+<h1>Manual del Operador<a class="headerlink" href="#manual-del-operador" title="Link to this heading"></a></h1>
+<p>Este manual detalla la operación de la interfaz gráfica de usuario (GUI) de BD Forge vE 2.0.0.0. El sistema está diseñado para minimizar el error humano mediante retroalimentación visual inmediata.</p>
+<section id="la-interfaz-data-hopper">
+<h2>1. La Interfaz “Data Hopper”<a class="headerlink" href="#la-interfaz-data-hopper" title="Link to this heading"></a></h2>
+<p>La ventana principal actúa como una tolva de procesamiento centralizado.</p>
+<section id="zona-de-arrastre-drop-zone">
+<h3>Zona de Arrastre (Drop Zone)<a class="headerlink" href="#zona-de-arrastre-drop-zone" title="Link to this heading"></a></h3>
+<p>El panel central (“EmptyStatePanel”) detecta eventos de arrastre del sistema operativo.
+* <strong>Archivos Admitidos:</strong> <cite>.xlsx</cite>, <cite>.xls</cite>, <cite>.ods</cite>, <cite>.csv</cite>, <cite>.txt</cite>, <cite>.dbf</cite>.
+* <strong>Comportamiento:</strong> Al soltar archivos, el sistema instancia una <code class="docutils literal notranslate"><span class="pre">SheetCard</span></code> por cada documento válido. Los archivos no reconocidos son registrados en el log como advertencias (<cite>WARN</cite>) y descartados silenciosamente para no interrumpir el flujo por lotes.</p>
+</section>
+<section id="barra-de-herramientas-global">
+<h3>Barra de Herramientas Global<a class="headerlink" href="#barra-de-herramientas-global" title="Link to this heading"></a></h3>
+<p>Ubicada en la parte inferior (<cite>WorkspaceFooter</cite>), controla el destino de la exportación masiva.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Format Dropdown:</strong> Permite forzar un formato de salida para <strong>todas</strong> las fichas activas.</dt><dd><ul>
+<li><p><em>[ Individual ]</em>: Respeta la configuración de cada tarjeta.</p></li>
+<li><p><em>DBF (dBase)</em>: Fuerza compatibilidad VFP9.</p></li>
+<li><p><em>Excel (.xlsx)</em>: Genera reportes nativos.</p></li>
+<li><p><em>CSV (Text)</em>: Texto plano delimitado por comas.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Merge Switch (Interruptor de Fusión):</strong></dt><dd><ul>
+<li><p><strong>OFF:</strong> Cada archivo de entrada genera un archivo de salida independiente.</p></li>
+<li><p><strong>ON:</strong> Activa el algoritmo de consolidación. Todas las fichas se fusionan en un solo archivo maestro (definido en <cite>MergeFilenameInput</cite>).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+<section id="fichas-de-control-sheet-cards">
+<h2>2. Fichas de Control (Sheet Cards)<a class="headerlink" href="#fichas-de-control-sheet-cards" title="Link to this heading"></a></h2>
+<p>Cada archivo cargado se representa como un objeto visual complejo (<cite>SheetCard.cs</cite>).</p>
+<section id="semaforo-de-estado-visual-helper">
+<h3>Semáforo de Estado (Visual Helper)<a class="headerlink" href="#semaforo-de-estado-visual-helper" title="Link to this heading"></a></h3>
+<p>El sistema comunica la salud del proceso mediante un código de colores y estados, gestionado por la clase <code class="docutils literal notranslate"><span class="pre">VisualCardHelper</span></code>:</p>
+</section>
+<section id="editor-de-estructura-live-debugging">
+<h3>Editor de Estructura (Live Debugging)<a class="headerlink" href="#editor-de-estructura-live-debugging" title="Link to this heading"></a></h3>
+<p>Al expandir una ficha (“Configure Fields”), se presenta la matriz de columnas detectadas.</p>
+<ul class="simple">
+<li><p><strong>Validación en Tiempo Real:</strong> El sistema implementa un <em>Debounce Timer</em> de 0.5 segundos. Cuando el usuario modifica un tipo de dato o una longitud, el sistema re-escanea una muestra de 50 registros (<cite>DebugSample</cite>) en memoria.</p></li>
+<li><dl class="simple">
+<dt><strong>Indicadores de Fila:</strong></dt><dd><ul>
+<li><p><strong>✔ (Verde):</strong> Todos los datos de la muestra caben en la definición actual.</p></li>
+<li><p><strong>! (Rojo):</strong> Se ha detectado un dato que será truncado. <em>Ejemplo: Intentar guardar “2023-01-01” (10 chars) en un campo de largo 8.</em></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+<section id="tipos-de-datos-soportados">
+<h2>3. Tipos de Datos Soportados<a class="headerlink" href="#tipos-de-datos-soportados" title="Link to this heading"></a></h2>
+<p>El motor normaliza cualquier entrada a uno de los 6 tipos primitivos soportados por el kernel de exportación:</p>
+<ol class="arabic simple">
+<li><p><strong>Character (0):</strong> Texto alfanumérico. Máximo 254 caracteres (Límite estricto DBF).</p></li>
+<li><p><strong>Numeric (1):</strong> Números con punto flotante. Soporta notación científica y negativos.</p></li>
+<li><p><strong>Integer (2):</strong> Enteros puros (Long). El sistema trunca decimales automáticamente.</p></li>
+<li><p><strong>Date (3):</strong> Fechas. El sistema intenta sanear formatos locales (<cite>dd/mm/yy</cite>) e ISO (<cite>yyyy-mm-dd</cite>).</p></li>
+<li><p><strong>Logical (4):</strong> Booleano. Reconoce <cite>T/F</cite>, <cite>Y/N</cite>, <cite>1/0</cite>, <cite>Si/No</cite>.</p></li>
+<li><p><strong>Time (5):</strong> Tiempo o Duración. Convierte fracciones decimales de Excel (ej: <cite>0.5</cite> -&gt; <cite>12:00:00</cite>).</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Documentación Oficial de BD Forge (Data Hopper)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="resolucion_problemas.html" class="btn btn-neutral float-right" title="Guía de Resolución de Problemas (Troubleshooting)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, YirehStudios.
+      <span class="lastupdated">Last updated on True.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

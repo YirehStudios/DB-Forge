@@ -1,0 +1,749 @@
+[gd_scene format=3 uid="uid://3hh47q0qnktd"]
+
+[ext_resource type="Script" uid="uid://cpe7bn1vqqlvn" path="res://Script/SheetCard.cs" id="1_cf1ue"]
+[ext_resource type="FontFile" uid="uid://bu7nhdf4bc48l" path="res://Recursos/Inter/static/Inter_18pt-Regular.ttf" id="2_font_reg"]
+[ext_resource type="Script" uid="uid://dskrlrm73j0s7" path="res://Script/VisualCardHelper.cs" id="2_khnmi"]
+[ext_resource type="FontFile" uid="uid://cb2k130bwyxny" path="res://Recursos/Inter/static/Inter_18pt-Bold.ttf" id="3_font_bold"]
+[ext_resource type="Texture2D" uid="uid://05mdl4l1dhtb" path="res://Recursos/Imagenes/Icons/Wait.png" id="3_x60u4"]
+[ext_resource type="Texture2D" uid="uid://truywtfnb8nd" path="res://Recursos/Imagenes/Icons/Procesing.png" id="4_6wqt4"]
+[ext_resource type="Texture2D" uid="uid://c2aw1nryh58xp" path="res://Recursos/Imagenes/Icons/Success.png" id="5_mvrvu"]
+[ext_resource type="Texture2D" uid="uid://o32hytf641ir" path="res://Recursos/Imagenes/Icons/Error.png" id="6_016sn"]
+[ext_resource type="Texture2D" uid="uid://c26jj55d7fufp" path="res://Recursos/Imagenes/Icons/Warning.png" id="7_7mxbu"]
+[ext_resource type="Texture2D" uid="uid://dil1tkrb8m2uv" path="res://Recursos/Imagenes/Icons/SelectFolder.png" id="8_dt3rj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Card_Base"]
+bg_color = Color(0.05, 0.05, 0.06, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Header_Clean"]
+bg_color = Color(0.09, 0.09, 0.11, 1)
+border_width_bottom = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Icon_Container"]
+bg_color = Color(0.12, 0.12, 0.14, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.2, 0.25, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_Focus"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Check_Normal"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.4, 0.45, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Check_Pressed"]
+bg_color = Color(0.0627451, 0.72549, 0.505882, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0627451, 0.72549, 0.505882, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Theme" id="Theme_CheckBox"]
+CheckBox/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+CheckBox/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+CheckBox/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+CheckBox/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+CheckBox/colors/font_pressed_color = Color(1, 1, 1, 1)
+CheckBox/constants/h_separation = 4
+CheckBox/font_sizes/font_size = 14
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_Focus")
+CheckBox/styles/hover = SubResource("StyleBox_Check_Normal")
+CheckBox/styles/hover_pressed = SubResource("StyleBox_Check_Pressed")
+CheckBox/styles/normal = SubResource("StyleBox_Check_Normal")
+CheckBox/styles/pressed = SubResource("StyleBox_Check_Pressed")
+
+[sub_resource type="LabelSettings" id="LabelSettings_Subtitle"]
+font = ExtResource("2_font_reg")
+font_size = 10
+font_color = Color(0.0627451, 0.72549, 0.505882, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_Title"]
+font = ExtResource("3_font_bold")
+font_size = 14
+font_color = Color(0.9, 0.9, 0.92, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Btn_Icon_Only"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.2, 0.25, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Btn_Icon_Hover"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.18, 0.18, 0.2, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.4, 0.45, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Edit_Normal"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.03, 0.03, 0.04, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.2, 0.25, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Btn_Action"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+bg_color = Color(0.12, 0.12, 0.14, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.2, 0.25, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Btn_Action_Hover"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+bg_color = Color(0.18, 0.18, 0.2, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.4, 0.45, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Pill_Status"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.07, 0.07, 0.08, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.2, 0.25, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_Status"]
+font = ExtResource("2_font_reg")
+font_size = 11
+font_color = Color(0.5, 0.5, 0.55, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Body_Config"]
+bg_color = Color(0.02, 0.02, 0.03, 0.5)
+border_width_top = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Btn_Primary"]
+bg_color = Color(0.0627451, 0.72549, 0.505882, 0.1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0627451, 0.72549, 0.505882, 0.3)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Btn_Primary_Hover"]
+bg_color = Color(0.0627451, 0.72549, 0.505882, 0.2)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0627451, 0.72549, 0.505882, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Config_List"]
+bg_color = Color(0.03, 0.03, 0.04, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Header_Table"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.07, 0.07, 0.08, 1)
+border_width_bottom = 1
+border_color = Color(0.15, 0.15, 0.18, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_HeaderTable"]
+font = ExtResource("3_font_bold")
+font_size = 10
+font_color = Color(0.4, 0.4, 0.45, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Scroll"]
+bg_color = Color(0.2, 0.2, 0.25, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Scroll_Focus"]
+bg_color = Color(0.4, 0.4, 0.45, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Theme" id="Theme_Scroll_Mini"]
+VScrollBar/styles/grabber = SubResource("StyleBox_Scroll")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBox_Scroll_Focus")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBox_Scroll_Focus")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_Focus")
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Dimmer"]
+bg_color = Color(0, 0, 0, 0.7)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_Prog_Fill_Card"]
+bg_color = Color(0.0627451, 0.72549, 0.505882, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Animation" id="Animation_Collapse"]
+resource_name = "Collapse"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_Expand"]
+resource_name = "Expand"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.3, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_RESET"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_Ficha"]
+_data = {
+&"Collapse": SubResource("Animation_Collapse"),
+&"Expand": SubResource("Animation_Expand"),
+&"RESET": SubResource("Animation_RESET")
+}
+
+[node name="SheetCardRoot" type="PanelContainer" unique_id=864777775 node_paths=PackedStringArray("EnableCheckbox", "SourceFileLabel", "OutputFilenameInput", "FormatDropdown", "StatusLabel", "ToggleFieldsBtn", "FieldsEditorContainer", "FieldsListVBox", "AddManualFieldBtn", "TogglePreviewBtn", "DataPreviewContainer", "PreviewGrid", "OutputFolderBtn", "LogsBtn", "EditBtn", "LoadingOverlay", "CardProgressBar")]
+offset_right = 1000.0
+offset_bottom = 120.0
+theme_override_styles/panel = SubResource("StyleBox_Card_Base")
+script = ExtResource("1_cf1ue")
+EnableCheckbox = NodePath("CardLayout/CardHeader/Margin/HBox/IconContainer/EnableCheckbox")
+SourceFileLabel = NodePath("CardLayout/CardHeader/Margin/HBox/FileInfoBox/SourceFileLabel")
+OutputFilenameInput = NodePath("CardLayout/CardHeader/Margin/HBox/HeaderActionsBox/OutputFilenameInput")
+FormatDropdown = NodePath("CardLayout/CardHeader/Margin/HBox/HeaderActionsBox/FormatDropdown")
+StatusLabel = NodePath("CardLayout/CardHeader/Margin/HBox/StatusIndicatorBox/StatusPillPanel/HBox/StatusLabel")
+ToggleFieldsBtn = NodePath("CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/ConfigToolbarHBox/ToolbarLeftGroup/ToggleFieldsBtn")
+FieldsEditorContainer = NodePath("CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer")
+FieldsListVBox = NodePath("CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer/FieldsListBackground/Margin/VBox/FieldsScroll/FieldsListVBox")
+AddManualFieldBtn = NodePath("CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/ConfigToolbarHBox/ToolbarRightGroup/AddManualFieldBtn")
+TogglePreviewBtn = NodePath("CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/ConfigToolbarHBox/ToolbarLeftGroup/TogglePreviewBtn")
+DataPreviewContainer = NodePath("CardLayout/DataPreviewContainer")
+PreviewGrid = NodePath("CardLayout/DataPreviewContainer/Margin/DataScroll/PreviewGrid")
+OutputFolderBtn = NodePath("CardLayout/CardHeader/Margin/HBox/HeaderActionsBox/OutputFolderBtn")
+LogsBtn = NodePath("CardLayout/CardHeader/Margin/HBox/HeaderActionsBox/LogsBtn")
+EditBtn = NodePath("CardLayout/CardHeader/Margin/HBox/HeaderActionsBox/EditBtn")
+LoadingOverlay = NodePath("LoadingOverlay")
+CardProgressBar = NodePath("LoadingOverlay/Center/VBox/CardProgressBar")
+
+[node name="VisualHelper" type="Node" parent="." unique_id=1041716420 node_paths=PackedStringArray("RootControl", "LblStatus", "IconStatus")]
+script = ExtResource("2_khnmi")
+RootControl = NodePath("..")
+LblStatus = NodePath("../CardLayout/CardHeader/Margin/HBox/StatusIndicatorBox/StatusPillPanel/HBox/StatusLabel")
+IconStatus = NodePath("../CardLayout/CardHeader/Margin/HBox/StatusIndicatorBox/StatusPillPanel/HBox/StatusIcon")
+TexWait = ExtResource("3_x60u4")
+TexProcess = ExtResource("4_6wqt4")
+TexSuccess = ExtResource("5_mvrvu")
+TexError = ExtResource("6_016sn")
+TexWarning = ExtResource("7_7mxbu")
+
+[node name="CardLayout" type="VBoxContainer" parent="." unique_id=1274642195]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="CardHeader" type="PanelContainer" parent="CardLayout" unique_id=1975292487]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Header_Clean")
+
+[node name="Margin" type="MarginContainer" parent="CardLayout/CardHeader" unique_id=1441528697]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 16
+
+[node name="HBox" type="HBoxContainer" parent="CardLayout/CardHeader/Margin" unique_id=1838812382]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="IconContainer" type="PanelContainer" parent="CardLayout/CardHeader/Margin/HBox" unique_id=613663064]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Icon_Container")
+
+[node name="EnableCheckbox" type="CheckBox" parent="CardLayout/CardHeader/Margin/HBox/IconContainer" unique_id=696684920]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_CheckBox")
+button_pressed = true
+
+[node name="FileInfoBox" type="VBoxContainer" parent="CardLayout/CardHeader/Margin/HBox" unique_id=1481051705]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="TypeLabel" type="Label" parent="CardLayout/CardHeader/Margin/HBox/FileInfoBox" unique_id=519757021]
+layout_mode = 2
+text = "DATA SHEET"
+label_settings = SubResource("LabelSettings_Subtitle")
+uppercase = true
+
+[node name="SourceFileLabel" type="Label" parent="CardLayout/CardHeader/Margin/HBox/FileInfoBox" unique_id=62228680]
+layout_mode = 2
+text = "File.xlsx"
+label_settings = SubResource("LabelSettings_Title")
+text_overrun_behavior = 3
+
+[node name="HeaderActionsBox" type="HBoxContainer" parent="CardLayout/CardHeader/Margin/HBox" unique_id=2117707221]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="OutputFolderBtn" type="Button" parent="CardLayout/CardHeader/Margin/HBox/HeaderActionsBox" unique_id=195415755]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Select output folder"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBox_Btn_Icon_Only")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Icon_Hover")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Icon_Hover")
+icon = ExtResource("8_dt3rj")
+icon_alignment = 1
+expand_icon = true
+
+[node name="OutputFilenameInput" type="LineEdit" parent="CardLayout/CardHeader/Margin/HBox/HeaderActionsBox" unique_id=779358979]
+custom_minimum_size = Vector2(200, 42)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_colors/font_placeholder_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_fonts/font = ExtResource("2_font_reg")
+theme_override_styles/normal = SubResource("StyleBox_Edit_Normal")
+placeholder_text = "Output Filename..."
+caret_blink = true
+
+[node name="FormatDropdown" type="OptionButton" parent="CardLayout/CardHeader/Margin/HBox/HeaderActionsBox" unique_id=1516663924]
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_styles/normal = SubResource("StyleBox_Btn_Action")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Action_Hover")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Action_Hover")
+selected = 0
+item_count = 3
+popup/item_0/text = "DBF"
+popup/item_0/id = 0
+popup/item_1/text = "EXCEL"
+popup/item_1/id = 1
+popup/item_2/text = "CSV"
+popup/item_2/id = 2
+
+[node name="EditBtn" type="Button" parent="CardLayout/CardHeader/Margin/HBox/HeaderActionsBox" unique_id=58510147]
+visible = false
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Edit (Coming Soon)"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_styles/normal = SubResource("StyleBox_Btn_Icon_Only")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Icon_Hover")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Icon_Hover")
+disabled = true
+text = "EDIT"
+
+[node name="LogsBtn" type="Button" parent="CardLayout/CardHeader/Margin/HBox/HeaderActionsBox" unique_id=308673422]
+custom_minimum_size = Vector2(60, 42)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "View Logs"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_styles/normal = SubResource("StyleBox_Btn_Icon_Only")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Icon_Hover")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Icon_Hover")
+text = "LOGS"
+
+[node name="StatusIndicatorBox" type="CenterContainer" parent="CardLayout/CardHeader/Margin/HBox" unique_id=97756143]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="StatusPillPanel" type="PanelContainer" parent="CardLayout/CardHeader/Margin/HBox/StatusIndicatorBox" unique_id=872685959]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Pill_Status")
+
+[node name="HBox" type="HBoxContainer" parent="CardLayout/CardHeader/Margin/HBox/StatusIndicatorBox/StatusPillPanel" unique_id=1850594720]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="StatusIcon" type="TextureRect" parent="CardLayout/CardHeader/Margin/HBox/StatusIndicatorBox/StatusPillPanel/HBox" unique_id=1425753491]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusLabel" type="Label" parent="CardLayout/CardHeader/Margin/HBox/StatusIndicatorBox/StatusPillPanel/HBox" unique_id=489211301]
+layout_mode = 2
+text = "Queued"
+label_settings = SubResource("LabelSettings_Status")
+
+[node name="ConfigBodyPanel" type="PanelContainer" parent="CardLayout" unique_id=1622242408]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBox_Body_Config")
+
+[node name="Margin" type="MarginContainer" parent="CardLayout/ConfigBodyPanel" unique_id=856007952]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ConfigLayoutVBox" type="VBoxContainer" parent="CardLayout/ConfigBodyPanel/Margin" unique_id=1383461592]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ConfigToolbarHBox" type="HBoxContainer" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox" unique_id=1025387679]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="ToolbarLeftGroup" type="HBoxContainer" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/ConfigToolbarHBox" unique_id=1287969082]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="ToggleFieldsBtn" type="Button" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/ConfigToolbarHBox/ToolbarLeftGroup" unique_id=1025950885]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_fonts/font = ExtResource("2_font_reg")
+theme_override_styles/normal = SubResource("StyleBox_Btn_Action")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Action_Hover")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Action_Hover")
+text = "Configure Fields"
+
+[node name="TogglePreviewBtn" type="Button" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/ConfigToolbarHBox/ToolbarLeftGroup" unique_id=1527814701]
+visible = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_fonts/font = ExtResource("2_font_reg")
+theme_override_styles/normal = SubResource("StyleBox_Btn_Action")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Action_Hover")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Action_Hover")
+text = "View Data"
+
+[node name="ToolbarRightGroup" type="HBoxContainer" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/ConfigToolbarHBox" unique_id=1910435942]
+layout_mode = 2
+
+[node name="AddManualFieldBtn" type="Button" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/ConfigToolbarHBox/ToolbarRightGroup" unique_id=751958587]
+custom_minimum_size = Vector2(140, 36)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_styles/normal = SubResource("StyleBox_Btn_Primary")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Primary_Hover")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Primary_Hover")
+text = "+ Manual Field"
+
+[node name="FieldsEditorContainer" type="VBoxContainer" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox" unique_id=1977148960]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Spacer" type="Control" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer" unique_id=1295769290]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="FieldsListBackground" type="PanelContainer" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer" unique_id=1403534850]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBox_Config_List")
+
+[node name="Margin" type="MarginContainer" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer/FieldsListBackground" unique_id=1997694205]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBox" type="VBoxContainer" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer/FieldsListBackground/Margin" unique_id=1735534634]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="FieldsTableHeader" type="PanelContainer" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer/FieldsListBackground/Margin/VBox" unique_id=512340485]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Header_Table")
+
+[node name="HeaderLabelsHBox" type="HBoxContainer" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer/FieldsListBackground/Margin/VBox/FieldsTableHeader" unique_id=750355997]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="H1" type="Label" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer/FieldsListBackground/Margin/VBox/FieldsTableHeader/HeaderLabelsHBox" unique_id=1311513607]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "FIELD NAME"
+label_settings = SubResource("LabelSettings_HeaderTable")
+
+[node name="H2" type="Label" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer/FieldsListBackground/Margin/VBox/FieldsTableHeader/HeaderLabelsHBox" unique_id=206767418]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "DATA TYPE"
+label_settings = SubResource("LabelSettings_HeaderTable")
+
+[node name="H3" type="Label" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer/FieldsListBackground/Margin/VBox/FieldsTableHeader/HeaderLabelsHBox" unique_id=1740167154]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "LENGTH"
+label_settings = SubResource("LabelSettings_HeaderTable")
+horizontal_alignment = 1
+
+[node name="H4" type="Label" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer/FieldsListBackground/Margin/VBox/FieldsTableHeader/HeaderLabelsHBox" unique_id=869988737]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "DEC."
+label_settings = SubResource("LabelSettings_HeaderTable")
+horizontal_alignment = 1
+
+[node name="H5" type="Label" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer/FieldsListBackground/Margin/VBox/FieldsTableHeader/HeaderLabelsHBox" unique_id=892863061]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "OK"
+label_settings = SubResource("LabelSettings_HeaderTable")
+horizontal_alignment = 1
+
+[node name="FieldsScroll" type="ScrollContainer" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer/FieldsListBackground/Margin/VBox" unique_id=494160669]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_Scroll_Mini")
+
+[node name="FieldsListVBox" type="VBoxContainer" parent="CardLayout/ConfigBodyPanel/Margin/ConfigLayoutVBox/FieldsEditorContainer/FieldsListBackground/Margin/VBox/FieldsScroll" unique_id=1931013721]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="DataPreviewContainer" type="PanelContainer" parent="CardLayout" unique_id=1519426372]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Config_List")
+
+[node name="Margin" type="MarginContainer" parent="CardLayout/DataPreviewContainer" unique_id=449623931]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="DataScroll" type="ScrollContainer" parent="CardLayout/DataPreviewContainer/Margin" unique_id=107071134]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme = SubResource("Theme_Scroll_Mini")
+
+[node name="PreviewGrid" type="GridContainer" parent="CardLayout/DataPreviewContainer/Margin/DataScroll" unique_id=1517267117]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+
+[node name="LoadingOverlay" type="PanelContainer" parent="." unique_id=121461500]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Dimmer")
+
+[node name="Center" type="CenterContainer" parent="LoadingOverlay" unique_id=968474838]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="LoadingOverlay/Center" unique_id=225312290]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LoadingLabel" type="Label" parent="LoadingOverlay/Center/VBox" unique_id=71337281]
+layout_mode = 2
+text = "Loading..."
+label_settings = SubResource("LabelSettings_Title")
+horizontal_alignment = 1
+
+[node name="CardProgressBar" type="ProgressBar" parent="LoadingOverlay/Center/VBox" unique_id=490730845]
+custom_minimum_size = Vector2(150, 4)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBox_Prog_Fill_Card")
+show_percentage = false
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="." unique_id=923741499]
+libraries/ = SubResource("AnimationLibrary_Ficha")

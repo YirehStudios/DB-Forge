@@ -1,0 +1,215 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentación Oficial de BD Forge (Data Hopper) &mdash; BD Forge (Data Hopper) vE 2.0.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e51e059b"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Manual del Operador" href="manual_usuario.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            BD Forge (Data Hopper)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">📘 Manual del Operador</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_usuario.html">Manual del Operador</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolucion_problemas.html">Guía de Resolución de Problemas (Troubleshooting)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">⚙️ Arquitectura e Ingeniería</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arquitectura_tecnica.html">Arquitectura del Sistema y Núcleo de Procesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motor_inferencia.html">Motor de Inferencia Estadística (Stride Sampling)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sistema_logs_forense.html">Sistema de Logs Forense y Auditoría</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">💻 Desarrollo (DevOps)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="referencia_api.html">Referencia de API del Núcleo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">BD Forge (Data Hopper)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Documentación Oficial de BD Forge (Data Hopper)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="documentacion-oficial-de-bd-forge-data-hopper">
+<h1>Documentación Oficial de BD Forge (Data Hopper)<a class="headerlink" href="#documentacion-oficial-de-bd-forge-data-hopper" title="Link to this heading"></a></h1>
+<img alt="https://img.shields.io/badge/Versión-vE%202.0.0.0-blue.svg" src="https://img.shields.io/badge/Versión-vE%202.0.0.0-blue.svg" />
+<img alt="https://img.shields.io/badge/Estado-Producción-green.svg" src="https://img.shields.io/badge/Estado-Producción-green.svg" />
+<img alt="https://img.shields.io/badge/Arquitectura-C4-orange.svg" src="https://img.shields.io/badge/Arquitectura-C4-orange.svg" />
+<p><strong>BD Forge</strong> no es simplemente un convertidor de archivos; es un sistema de ingeniería de datos diseñado bajo el paradigma de <em>“Tolva de Datos”</em> (Data Hopper). Su misión crítica es asegurar la integridad relacional de datos no estructurados antes de su ingesta en sistemas de producción SQL o DBF.</p>
+<p>Esta documentación ha sido estructurada siguiendo el marco de trabajo <strong>Diátaxis</strong>, dividiendo el conocimiento en cuatro cuadrantes: Tutoriales, Guías Prácticas, Referencia Técnica y Explicación Teórica.</p>
+<section id="contenido">
+<h2>Contenido<a class="headerlink" href="#contenido" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound" id="sec-usuario">
+<p class="caption" role="heading"><span class="caption-text">📘 Manual del Operador</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_usuario.html">Manual del Operador</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manual_usuario.html#la-interfaz-data-hopper">1. La Interfaz “Data Hopper”</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="manual_usuario.html#zona-de-arrastre-drop-zone">Zona de Arrastre (Drop Zone)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual_usuario.html#barra-de-herramientas-global">Barra de Herramientas Global</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="manual_usuario.html#fichas-de-control-sheet-cards">2. Fichas de Control (Sheet Cards)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="manual_usuario.html#semaforo-de-estado-visual-helper">Semáforo de Estado (Visual Helper)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual_usuario.html#editor-de-estructura-live-debugging">Editor de Estructura (Live Debugging)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="manual_usuario.html#tipos-de-datos-soportados">3. Tipos de Datos Soportados</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resolucion_problemas.html">Guía de Resolución de Problemas (Troubleshooting)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="resolucion_problemas.html#errores-de-archivo-y-sistema">Errores de Archivo y Sistema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="resolucion_problemas.html#error-el-proceso-no-puede-acceder-al-archivo-porque-esta-siendo-utilizado">Error: “El proceso no puede acceder al archivo porque está siendo utilizado”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resolucion_problemas.html#error-memory-limit-exceeded-o-cierre-inesperado">Error: “Memory Limit Exceeded” o Cierre Inesperado</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="resolucion_problemas.html#anomalias-de-datos">Anomalías de Datos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="resolucion_problemas.html#columnas-fantasmas-o-vacias">Columnas “Fantasmas” o vacías</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resolucion_problemas.html#fechas-con-formato-incorrecto-dia-mes-invertido">Fechas con formato incorrecto (Día/Mes invertido)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound" id="sec-tecnica">
+<p class="caption" role="heading"><span class="caption-text">⚙️ Arquitectura e Ingeniería</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arquitectura_tecnica.html">Arquitectura del Sistema y Núcleo de Procesamiento</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="arquitectura_tecnica.html#estrategias-de-ingesta-the-readers">1. Estrategias de Ingesta (The Readers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arquitectura_tecnica.html#a-lector-excel-dom-excelreadernpoi-cs">A. Lector Excel DOM (<code class="docutils literal notranslate"><span class="pre">ExcelReaderNPOI.cs</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arquitectura_tecnica.html#b-lector-opendocument-streaming-odsreader-cs">B. Lector OpenDocument Streaming (<code class="docutils literal notranslate"><span class="pre">OdsReader.cs</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="arquitectura_tecnica.html#el-motor-de-exportacion-the-hopper">2. El Motor de Exportación (“The Hopper”)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arquitectura_tecnica.html#modelo-de-datos-y-dtos">3. Modelo de Datos y DTOs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="motor_inferencia.html">Motor de Inferencia Estadística (Stride Sampling)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="motor_inferencia.html#algoritmo-de-muestreo-estriado">Algoritmo de Muestreo Estriado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motor_inferencia.html#sistema-de-votacion">Sistema de Votación</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="motor_inferencia.html#jerarquia-de-evaluacion">Jerarquía de Evaluación</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="motor_inferencia.html#deteccion-de-columnas-fantasma">Detección de Columnas Fantasma</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sistema_logs_forense.html">Sistema de Logs Forense y Auditoría</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sistema_logs_forense.html#niveles-de-registro">Niveles de Registro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sistema_logs_forense.html#persistencia-dual">Persistencia Dual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sistema_logs_forense.html#traza-quirurgica-surgical-trace">Traza Quirúrgica (Surgical Trace)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound" id="sec-dev">
+<p class="caption" role="heading"><span class="caption-text">💻 Desarrollo (DevOps)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="referencia_api.html">Referencia de API del Núcleo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="referencia_api.html#readers-namespace">Readers Namespace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="referencia_api.html#clase-excelreadernpoi">Clase <code class="docutils literal notranslate"><span class="pre">ExcelReaderNPOI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="referencia_api.html#clase-odsreader">Clase <code class="docutils literal notranslate"><span class="pre">OdsReader</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="referencia_api.html#ui-namespace">UI Namespace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="referencia_api.html#clase-mainmenu-controlador">Clase <code class="docutils literal notranslate"><span class="pre">MainMenu</span></code> (Controlador)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="referencia_api.html#clase-sheetcard-componente">Clase <code class="docutils literal notranslate"><span class="pre">SheetCard</span></code> (Componente)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="indices-y-tablas">
+<h1>Indices y Tablas<a class="headerlink" href="#indices-y-tablas" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="manual_usuario.html" class="btn btn-neutral float-right" title="Manual del Operador" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, YirehStudios.
+      <span class="lastupdated">Last updated on True.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

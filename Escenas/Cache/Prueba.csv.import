@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dy8nmhb1uk7i0"
+
+[deps]
+
+files=["res://Escenas/Cache/Prueba.0.translation", "res://Escenas/Cache/Prueba.DESC.translation", "res://Escenas/Cache/Prueba.DESC.translation", "res://Escenas/Cache/Prueba.TIEMPO.translation", "res://Escenas/Cache/Prueba.FECHA.translation", "res://Escenas/Cache/Prueba.ACTIVO.translation", "res://Escenas/Cache/Prueba.MONTO.translation", "res://Escenas/Cache/Prueba.NOTAS.translation"]
+
+source_file="res://Escenas/Cache/Prueba.csv"
+dest_files=["res://Escenas/Cache/Prueba.0.translation", "res://Escenas/Cache/Prueba.DESC.translation", "res://Escenas/Cache/Prueba.DESC.translation", "res://Escenas/Cache/Prueba.TIEMPO.translation", "res://Escenas/Cache/Prueba.FECHA.translation", "res://Escenas/Cache/Prueba.ACTIVO.translation", "res://Escenas/Cache/Prueba.MONTO.translation", "res://Escenas/Cache/Prueba.NOTAS.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

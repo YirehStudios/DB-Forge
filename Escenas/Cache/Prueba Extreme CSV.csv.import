@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c7u1op1obggil"
+
+[deps]
+
+files=["res://Escenas/Cache/Prueba Extreme CSV.0.translation", "res://Escenas/Cache/Prueba Extreme CSV.DESC.translation", "res://Escenas/Cache/Prueba Extreme CSV.DESC.translation", "res://Escenas/Cache/Prueba Extreme CSV.TIEMPO.translation", "res://Escenas/Cache/Prueba Extreme CSV.FECHA.translation", "res://Escenas/Cache/Prueba Extreme CSV.ACTIVO.translation", "res://Escenas/Cache/Prueba Extreme CSV.MONTO.translation", "res://Escenas/Cache/Prueba Extreme CSV.NOTAS.translation"]
+
+source_file="res://Escenas/Cache/Prueba Extreme CSV.csv"
+dest_files=["res://Escenas/Cache/Prueba Extreme CSV.0.translation", "res://Escenas/Cache/Prueba Extreme CSV.DESC.translation", "res://Escenas/Cache/Prueba Extreme CSV.DESC.translation", "res://Escenas/Cache/Prueba Extreme CSV.TIEMPO.translation", "res://Escenas/Cache/Prueba Extreme CSV.FECHA.translation", "res://Escenas/Cache/Prueba Extreme CSV.ACTIVO.translation", "res://Escenas/Cache/Prueba Extreme CSV.MONTO.translation", "res://Escenas/Cache/Prueba Extreme CSV.NOTAS.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true
