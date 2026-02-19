@@ -1,6 +1,6 @@
 PROYECTO: BD FORGE (DATA HOPPER)
 
-VERSIÓN DEL SOFTWARE: vE 2.0.0.0 (Enterprise Edition)
+VERSIÓN DEL SOFTWARE: vE 2.0.0.0
 ESTADO DEL CICLO DE VIDA: Producción (Core) / Beta Pública (UI)
 ARQUITECTURA: x64 / .NET 6.0
 MOTOR BASE: Godot Engine 4.x (.NET Module)
