@@ -1,115 +1,153 @@
 PROYECTO: BD FORGE (DATA HOPPER)
-================================================================================
-VERSIÓN DEL SOFTWARE: vG 1.1.0.2
-ESTADO DEL CICLO DE VIDA: Tech Demo / Alpha de Producción
+
+VERSIÓN DEL SOFTWARE: vE 2.0.0.0 (Enterprise Edition)
+ESTADO DEL CICLO DE VIDA: Producción (Core) / Beta Pública (UI)
 ARQUITECTURA: x64 / .NET 6.0
 MOTOR BASE: Godot Engine 4.x (.NET Module)
 AUTORÍA: (C) 2026 YirehStudios
 LICENCIA: GNU General Public License v3 (Ver archivo LICENSE)
 
-1. VISIÓN GENERAL DEL SISTEMA
---------------------------------------------------------------------------------
-BD Forge no es un simple conversor de formatos; es una herramienta de Ingeniería 
-de Datos diseñada bajo el concepto de "Tolva de Datos" (Data Hopper). Su 
-objetivo es ingerir información cruda, desordenada y humanamente formateada 
+VISIÓN GENERAL DEL SISTEMA
+
+BD Forge no es un simple conversor de formatos; es una herramienta de Ingeniería
+de Datos diseñada bajo el concepto de "Tolva de Datos" (Data Hopper). Su
+objetivo es ingerir información cruda, desordenada y humanamente formateada
 desde diversas fuentes para normalizarla en estructuras estrictas.
 
-El sistema actúa como una capa de middleware (ETL: Extract, Transform, Load) 
-que garantiza la integridad referencial antes de que los datos toquen una base 
+El sistema actúa como una capa de middleware (ETL: Extract, Transform, Load)
+que garantiza la integridad referencial antes de que los datos toquen una base
 de datos de producción.
 
-En su versión actual (vG 1.1.0.2), el sistema se especializa en la exportación 
-hacia el estándar DBF (Visual FoxPro 9 Compatible), aunque su arquitectura 
-interna está desacoplada para soportar futuros drivers de salida (SQL, JSON, 
-XML) sin refactorización del núcleo.
+En su versión actual (vE 2.0.0.0), el sistema evoluciona hacia una plataforma
+de auditoría de datos, introduciendo registros forenses de mutación y
+algoritmos de inferencia estadística, manteniendo su especialización en la
+exportación hacia el estándar DBF (Visual FoxPro 9 Compatible).
 
-2. CAPACIDADES TÉCNICAS (FEATURE SET)
---------------------------------------------------------------------------------
-El sistema implementa soluciones a problemas comunes en la importación de datos:
+CAPACIDADES TÉCNICAS (FEATURE SET vE 2.0)
+
+El sistema implementa soluciones de grado industrial para la ingeniería de datos:
 
 A. MOTOR HÍBRIDO DE LECTURA
-   - DOM (Document Object Model): Para archivos Excel (.xlsx), carga la 
-     estructura completa en memoria para resolver lógica compleja como celdas 
-     combinadas.
-   - Streaming (Flujo): Para archivos OpenDocument (.ods), utiliza punteros 
-     de lectura XML secuencial, permitiendo procesar archivos masivos con 
-     una huella de memoria (RAM) mínima.
 
-B. ALGORITMOS DE NORMALIZACIÓN
-   - "Unmerge" Lógico: Transforma reportes visuales agrupados (celdas 
-     combinadas en Excel) en tablas planas relacionales.
-   - Inferencia de Tipos (Voting System): Analiza estadísticamente la densidad 
-     de datos de una columna para sugerir tipos (Date, Numeric, Boolean) y 
-     detectar "Columnas Fantasma" (basura).
-   - Extensión de Esquema: Capacidad de agregar columnas estructurales vacías (Placeholders) al archivo de salida para cumplir
-     con requisitos estrictos de formato de bases de datos destino.
+DOM (Document Object Model): Para archivos Excel (.xlsx), carga la
+estructura completa en memoria para resolver lógica compleja como celdas
+combinadas.
 
-C. GESTIÓN DE E/S (I/O) AVANZADA
-   - Hot-Read: Implementación de `FileShare.ReadWrite` que permite leer 
-     archivos aunque estén bloqueados por Excel o LibreOffice.
-   - Escritura Segura: Algoritmo de resolución de conflictos de nombres 
-     para evitar sobrescritura accidental o bloqueos de escritura.
+Streaming (Flujo): Para archivos OpenDocument (.ods), utiliza punteros
+de lectura XML secuencial, permitiendo procesar archivos masivos (>1M filas)
+con una huella de memoria (RAM) mínima.
 
-D. ROBUSTEZ NUMÉRICA (FAIL-SAFE)
-   - Integer Truncation Protection: El motor de escritura previene cierres inesperados (crashes)
-     cuando un número excede el largo definido.        
-   - Implementa una estrategia de truncado seguro o llenado de asteriscos (***) compatible con lectores legacy
-     garantizando que el resto del archivo se escriba correctamente.
+B. ALGORITMOS DE NORMALIZACIÓN E INFERENCIA
 
-3. REQUISITOS DEL ENTORNO DE EJECUCIÓN
---------------------------------------------------------------------------------
+Muestreo Estriado (Stride Sampling): Sustituye la lectura lineal por un
+algoritmo estadístico que distribuye muestras a lo largo de todo el documento
+para una detección de tipos precisa (95% confianza) en archivos heterogéneos.
+
+"Unmerge" Lógico: Transforma reportes visuales agrupados (celdas
+combinadas en Excel) en tablas planas relacionales automáticamente.
+
+Detección de Columnas Fantasma: Identificación proactiva y descarte de
+columnas basura que contaminan el esquema de la base de datos.
+
+C. AUDITORÍA Y TRAZABILIDAD (NUEVO)
+
+Logs Forenses: Motor de registro persistente que documenta cada mutación
+de datos (truncamiento, redondeo) con coordenadas exactas (Fila:Columna).
+
+Persistencia Dual: Escritura asíncrona en disco (FileShare.Read) con
+capacidad de monitoreo externo en tiempo real.
+
+D. GESTIÓN DE E/S (I/O) AVANZADA
+
+Hot-Read: Implementación de FileShare.ReadWrite que permite leer
+archivos aunque estén bloqueados por Excel o LibreOffice.
+
+Depuración en Vivo (Live Debugging): Sistema de validación anticipada en
+la UI que alerta sobre riesgos de integridad antes de iniciar la exportación.
+
+E. ROBUSTEZ NUMÉRICA (FAIL-SAFE)
+
+Integer Truncation Protection: El motor de escritura previene cierres
+inesperados (crashes) cuando un número excede el largo definido.
+
+Implementa una estrategia de truncado seguro o llenado de asteriscos (***)
+garantizando que el resto del archivo se escriba correctamente.
+
+REQUISITOS DEL ENTORNO DE EJECUCIÓN
+
 Para el despliegue del binario o la compilación desde el código fuente:
 
-- Sistema Operativo: 
-  - Windows 10 / 11 (Recomendado Build 19044 o superior).
-  - Arquitectura obligatoria x64.
+Sistema Operativo:
 
-- Dependencias de Framework:
-  - .NET 6.0 Runtime (o superior).
-  - Librerías de Visual C++ Redistributable (para dependencias nativas).
+Windows 10 / 11 (Recomendado Build 19044 o superior).
 
-- Hardware Recomendado:
-  - CPU: Procesador Multi-core (2+ núcleos) para el Garbage Collector concurrente.
-  - RAM: 
-    - 200 MB para operación base.
-    - 2 GB+ recomendados para datasets de Excel > 500,000 filas (debido a NPOI).
-    - El modo ODS es eficiente en memoria y opera con <500 MB incluso en carga alta.
+Arquitectura obligatoria x64.
 
-4. ESTRUCTURA DE COMPILACIÓN (BUILD)
---------------------------------------------------------------------------------
+Dependencias de Framework:
+
+.NET 6.0 Runtime (o superior).
+
+Librerías de Visual C++ Redistributable (para dependencias nativas).
+
+Hardware Recomendado:
+
+CPU: Procesador Multi-core (2+ núcleos) para el Garbage Collector concurrente.
+
+RAM:
+
+500 MB para operación base.
+
+4 GB+ recomendados para datasets de Excel > 500,000 filas (Modo DOM).
+
+El modo ODS es eficiente en memoria y opera con <500 MB incluso en carga alta.
+
+ESTRUCTURA DE COMPILACIÓN (BUILD)
+
 El proyecto utiliza Godot Engine como host de la aplicación .NET.
 
-- Dependencias NuGet Principales:
-  1. NPOI (2.x): Motor de manipulación de formatos Office Open XML.
-  2. NPOI.OOXML: Extensiones para formatos .xlsx.
-  3. System.Text.Encoding.CodePages: Soporte para codificación Windows-1252 
-     (ANSI Legacy) requerida para la compatibilidad con DBF.
-  4. System.IO.Compression: Gestión de descompresión para archivos ODS.
+Dependencias NuGet Principales:
 
-- Configuración de Exportación (Godot):
-  - Modo: Release.
-  - Arquitectura: x86_64.
-  - Embed PCK: Activado (Ejecutable monolítico).
+NPOI (2.x): Motor de manipulación de formatos Office Open XML.
 
-5. LIMITACIONES CONOCIDAS (vG 1.1.0.2)
---------------------------------------------------------------------------------
-- Nombres de Campos: Aunque la arquitectura interna soporta identificadores 
-  de hasta 128 caracteres (spec VFP9), el driver de escritura actual limita 
-  los nombres a 10 caracteres para mantener compatibilidad retroactiva estricta 
-  con sistemas legacy (dBase III).
-- CSV: No soporta agrupación lógica. Los archivos CSV se tratan como "Raw Data".
-- Fórmulas: BD Forge extrae el "Valor Calculado" en caché de las celdas de Excel. 
-  No re-calcula fórmulas en tiempo de ejecución.
+FastDBF: Driver optimizado para escritura de archivos xBase.
 
-6. ROADMAP Y FUTURO
---------------------------------------------------------------------------------
-El desarrollo actual se centra en la estabilidad del núcleo de ingestión.
-Funciones planificadas para versiones vG 1.2.x:
-- Soporte nativo para salida SQL (Script Generation).
-- Habilitación del driver VFP9 completo (Nombres de 128 caracteres).
-- Serialización a JSON para integración web.
-- Interfaz de línea de comandos (CLI) para automatización de servidores.
+System.Text.Encoding.CodePages: Soporte para codificación Windows-1252
+(ANSI Legacy) requerida para la compatibilidad con DBF.
 
---------------------------------------------------------------------------------
-DOCUMENTACIÓN TÉCNICA DETALLADA DISPONIBLE EN 'DOCUMENTATION.md'
-Mantener este archivo actualizado con cada refactorización del Kernel.
+System.IO.Compression: Gestión de descompresión para archivos ODS.
+
+Configuración de Exportación (Godot):
+
+Modo: Release.
+
+Arquitectura: x86_64.
+
+Embed PCK: Activado (Ejecutable monolítico).
+
+LIMITACIONES CONOCIDAS (vE 2.0.0.0)
+
+Interfaz Beta: La nueva capa visual (UI) puede presentar inconsistencias
+menores en la renderización de fuentes, aunque el núcleo de datos es estable.
+
+Nombres de Campos DBF: Se mantiene el límite estricto de 10 caracteres del
+estándar dBase III/IV, gestionado ahora por un algoritmo de truncado inteligente.
+
+CSV: No soporta agrupación lógica. Los archivos CSV se tratan como "Raw Data".
+
+Fórmulas: BD Forge extrae el "Valor Calculado" en caché; no re-calcula
+fórmulas complejas en tiempo de ejecución.
+
+ROADMAP Y FUTURO
+
+El desarrollo actual se centra en la estabilización de la UI Beta.
+Funciones planificadas para versiones vE 2.1.x:
+
+Soporte nativo para salida SQL (Generación de Scripts INSERT/UPDATE).
+
+Serialización a JSON para integración con APIs REST.
+
+Interfaz de línea de comandos (CLI) para automatización de servidores (Headless).
+
+Localización completa (i18n) de la interfaz de usuario.
+
+DOCUMENTACIÓN TÉCNICA DETALLADA DISPONIBLE EN 'db-forge-docs/_build/html/index.html'
